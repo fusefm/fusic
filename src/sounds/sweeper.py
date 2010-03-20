@@ -20,10 +20,10 @@
 class sweeper(sound):
 
 	# Constructor
-	def __init__(self, fileID):
+	def __init__(self, file_ID):
 		"""
 		Create a new sweeper with a given fileID (int).
 		"""
 		# TODO - Add MySQL instructions here to set member variables.
-		sound.__init__(self, 0) # TODO - Ensure the correct file_id is
+		sound.__init__(self, file_ID) # TODO - Ensure the correct file_id is
 		# passed to the sound constructor.

@@ -21,10 +21,10 @@
 class news(cart):
 
 	# Constructor
-	def __init__(self):
+	def __init__(self, file_ID):
 		"""Constructs a new news cart from the latest news recorded."""
 		# TODO - Add MySQL instructions here to set member variables.
-		cart.__init__(self, 0, 0) # TODO - Ensure that the correct cart is
+		cart.__init__(self, file_ID) # TODO - Ensure that the correct cart is
 		# constructed here.
 
 	# Class properties
