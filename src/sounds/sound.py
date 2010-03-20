@@ -20,7 +20,7 @@
 class sound(object):
 
 	# Constructor
-	def __init__(self, fileID):
+	def __init__(self, file_id):
 		"""
 		Create a new sound with a given fileID (int).
 		"""
