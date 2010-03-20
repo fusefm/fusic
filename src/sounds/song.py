@@ -21,6 +21,7 @@ class song(sound):
 
 	# Constructor
 	def __init__(self):
+		"""Creates a new song from a given fileID (int)."""
 		# TODO - Add MySQL instructions here to set member variables.
 		sound.__init__(self, 0) # TODO - Ensure the correct file_id is
 		# passed to the sound constructor.
@@ -28,16 +29,20 @@ class song(sound):
 	# Class properties
 	@property
 	def artist(self):
+		"""Returns the artist of the song."""
 		return ""
 
 	@property
 	def genre(self):
+		"""Returns the genre of the song."""
 		return ""
 
 	@property
 	def album(self):
+		"""Returns the album of the song."""
 		return ""
 
 	@property
 	def intro(self):
+		"""Returns the intro-time of the song (in seconds)."""
 		return 0

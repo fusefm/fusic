@@ -22,6 +22,7 @@ class news(cart):
 
 	# Constructor
 	def __init__(self):
+		"""Constructs a new news cart from the latest news recorded."""
 		# TODO - Add MySQL instructions here to set member variables.
 		cart.__init__(self, 0, 0) # TODO - Ensure that the correct cart is
 		# constructed here.
@@ -29,8 +30,10 @@ class news(cart):
 	# Class properties
 	@property
 	def date_time(self):
+		"""Returns the date/time of the news recorded."""
 		return 0
 
 	@property
 	def presenter(self):
+		"""Returns the user_id of the presenter that recorded the news."""
 		return 0

@@ -22,6 +22,7 @@ class cart(sound):
 
 	# Constructor
 	def __init__(self, cart_id, show_id):
+		"""Create a new cart from a cart_id (int) and a show_id(int)."""
 		# TODO - Add MySQL instructions here to set member variables.
 		sound.__init__(self, 0)# TODO - Ensure that the correct fileID is
 		# passed to the sound constructor.
@@ -29,12 +30,15 @@ class cart(sound):
 	# Class properties
 	@property
 	def posistion(self):
+		"""Returns the carts posistion."""
 		return []
 
 	@peoperty
 	def colour(self):
+		"""Returns the colour of the cart as a concatinated RGB string."""
 		return 0
 
 	@property
 	def playmode(self):
+		"""Returns the playmode of the cart."""
 		return 0
