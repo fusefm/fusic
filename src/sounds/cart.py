@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# sweeper - This object represents a cart type sound.
+# cart - This object represents a cart type sound.
 # It will also hold data relevent to the posistion, colour and type of cart.
 #
 # This file is part of Fusic.
