@@ -18,8 +18,8 @@
 # along with Fusic.  If not, see <http://www.gnu.org/licenses/>.
 
 database = (
-	"host":""
-	"user":""
-	"passwd":""
+	"host":"",
+	"user":"",
+	"passwd":"",
 	"db":""
 )
