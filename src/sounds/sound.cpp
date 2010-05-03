@@ -19,9 +19,16 @@
 
 #include "sound.h"
 
-sound::sound()
-{
+// For documentation, see sound.h
 
+// Constructor implimentation.
+sound::sound() : 
+  title(QString()),
+  location(QString()),
+  duration(0),
+  valid(false)
+{
+  
 }
 
 // public getter implimentation.
@@ -44,4 +51,20 @@ bool sound::isValid()
 {
   return valid;
 }
+
+// Protected member implimentation.
+
+void sound::invalidate()
+{
+  valid = false;
+}
+
+// Private member implimentation.
+
+bool sound::extraSetup(QSqlDatabase& db)
+{
+  return true;
+}
+
+
 

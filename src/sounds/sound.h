@@ -22,6 +22,7 @@
 
 // Qt Includes.
 #include <QObject>
+#include <QSqlDatabase>
 
 /**
  * @short A high level class that represents a sound in the fusic system.
@@ -114,9 +115,28 @@ signals:
    * @param success Weather the object was created successfully or not.
    */
   void setupComplete(bool success);
+  
+protected:
+  
+  /**
+   * Invalidate the sound object - only subclasses can do this.
+   * If the object is already invalid, this function has no effect.
+   */
+  void invalidate();
 
 private:
 
+  bool doSetup();
+  
+  /**
+   * This function should be overwritten for subclasses to setup their own properties
+   * ontop of the sound object's.
+   * @param db A database object will be passed that is already connected.
+   * @return A bool indicating weather the setup was successful or not. If a false is returned,
+   * it will invalidate this sound object.
+   */
+  virtual bool extraSetup(QSqlDatabase& db);
+  
   // Private storage vars:
   QString location;
   QString title;
