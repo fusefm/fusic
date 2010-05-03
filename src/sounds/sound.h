@@ -76,25 +76,25 @@ public:
   // Public getter functions.
   /**
    * Get the title of the sound.
-   * @returns a QString set to the title of the sound.
+   * @returns A QString set to the title of the sound.
    */
   QString getTitle();
 
   /**
    * Get the location of the sound.
-   * @returns a QString set to the location of the sound.
+   * @returns A QString set to the location of the sound.
    */
   QString getLocation();
 
   /**
    * Get the duration of a sound.
-   * @returns a double set to the duration of the sound in seconds.
+   * @returns A double set to the duration of the sound in seconds.
    */
   double getDuration();
 
   /**
    * Check for a valid sound object.
-   * @returns a bool, if true the sound object is valid. If false,
+   * @returns A bool. If true the sound object is valid. If false,
    * the object is invalid.
    */
   bool isValid();
