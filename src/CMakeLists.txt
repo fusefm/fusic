@@ -2,6 +2,7 @@
 cmake_minimum_required(VERSION 2.6)
 find_package(Qt4 REQUIRED)
 add_subdirectory(sounds)
+add_subdirectory(misc)
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 set(fusic_SRCS fusic.cpp main.cpp)
