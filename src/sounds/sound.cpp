@@ -17,7 +17,15 @@
 
 */
 
+// Local Includes:
 #include "sound.h"
+#include "fusicsettings.h"
+
+// Qt Includes
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QVariant>
 
 // For documentation, see sound.h
 
@@ -29,6 +37,18 @@ sound::sound() :
   valid(false)
 {
   
+}
+
+sound::sound(int fileID)
+{
+  if(!doSetup(fileID))
+  {
+    invalidate();
+  }
+  else
+  {
+    valid = true;
+  }
 }
 
 // public getter implimentation.
@@ -66,5 +86,56 @@ bool sound::extraSetup(QSqlDatabase& db)
   return true;
 }
 
+bool sound::doSetup(int fileID)
+{
+  QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+  
+  // Set database settings.
+  db.setDatabaseName(fusicSettings::DBSettings::getDatabase());
+  db.setHostName(fusicSettings::DBSettings::getHost());
+  db.setUserName(fusicSettings::DBSettings::getUserName());
+  db.setPassword(fusicSettings::DBSettings::getPassword());
+  db.setPort(fusicSettings::DBSettings::getPort());
+  
+  // Attempt connection.
+  if(!db.open())
+    return false;
+  
+  // Do the query.  
+  QSqlQuery query("SELECT * FROM sounds  WHERE sound_ID = ?");
+  query.bindValue(0, fileID);
+  query.exec();
+  
+  // Check results size.
+  if(query.size() < 1)
+  {
+    db.close();
+    return false;
+  }
+  
+  // Set variables.
+  int fIDLocation = query.record().indexOf("location");
+  int fIDTitle = query.record().indexOf("title");
+  int fIDDuration = query.record().indexOf("duration");
+  
+  // Get the first record.
+  query.next();
+  
+  // Get the info.
+  location = query.value(fIDLocation).toString();
+  title = query.value(fIDTitle).toString();
+  duration = query.value(fIDDuration).toDouble();
+  
+  // Do extra setup.
+  if(!extraSetup(db))
+  {
+    db.close();
+    return false;
+  }
+  
+  // Close the connection.
+  db.close();
+  return true;  
+}
 
 

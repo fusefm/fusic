@@ -23,6 +23,7 @@
 // Qt Includes.
 #include <QObject>
 #include <QSqlDatabase>
+#include <QThread>
 
 /**
  * @short A high level class that represents a sound in the fusic system.
@@ -126,7 +127,7 @@ protected:
 
 private:
 
-  bool doSetup();
+  bool doSetup(int fileID);
   
   /**
    * This function should be overwritten for subclasses to setup their own properties
@@ -143,6 +144,13 @@ private:
   double duration;
   bool valid;
   
+  class threadedSetup : public QThread
+  {
+      threadedSetup(sound& s);
+  };
+  
 };
+
+
 
 #endif // SOUND_H
