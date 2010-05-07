@@ -146,6 +146,19 @@ private:
   double duration;
   bool valid;
   
+  /**
+   * @short A child class for threaded setup.
+   *
+   * This class will impliment the QThread::run routine and call the
+   * doSetup() function on the sound class. You should not need to 
+   * use this class as the doSetup() function will call extraSetup(),
+   * where you can overide extra setup that is done by this thread.
+   *
+   * @see sound
+   * @see sound::extraSetup()
+   *
+   * @author Matthew Leach <matt@fusefm.co.uk>
+   */
   class threadedSetup : public QThread
   {
       threadedSetup(sound* s, int fileID);
