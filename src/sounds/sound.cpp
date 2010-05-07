@@ -93,7 +93,7 @@ void sound::invalidate()
 
 // Private member implimentation.
 
-bool sound::extraSetup(QSqlDatabase& db)
+bool sound::extraSetup(QSqlDatabase& db, int soundID)
 {
   return true;
 }
