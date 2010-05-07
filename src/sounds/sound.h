@@ -126,6 +126,12 @@ protected:
    */
   void invalidate();
 
+  /**
+   * A Mutex that should be used be subclasses to prevent getter functions
+   * from accessing the data before a threaded setup has been completed.
+   */
+  QMutex mutex;
+
 private:
 
   bool doSetup(int fileID);
@@ -142,7 +148,6 @@ private:
   // Private storage vars:
   QString location;
   QString title;
-  QMutex mutex;
   double duration;
   bool valid;
   
