@@ -111,6 +111,11 @@ void sound::threadedSetup::run()
     emit m_Sound->setupComplete(res);
 }
 
+void sound::setFileID(int fileID)
+{
+  threadedSetup tSetup(this, fileID);
+  tSetup.run();
+}
 
 bool sound::doSetup(int fileID)
 {
