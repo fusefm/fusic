@@ -164,7 +164,7 @@ bool sound::doSetup(int fileID)
   duration = query.value(fIDDuration).toDouble();
   
   // Do extra setup.
-  if(!extraSetup(db))
+  if(!extraSetup(db, fileID))
   {
     db.close();
     mutex.unlock();
