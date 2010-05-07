@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QSqlDatabase>
 #include <QThread>
+#include <QMutex>
 
 /**
  * @short A high level class that represents a sound in the fusic system.
@@ -141,14 +142,25 @@ private:
   // Private storage vars:
   QString location;
   QString title;
+  QMutex mutex;
   double duration;
   bool valid;
   
   class threadedSetup : public QThread
   {
-      threadedSetup(sound& s);
+      threadedSetup(sound* s, int fileID);
+      
+    public:
+      virtual void run();
+      
+    private:
+      sound* m_Sound;
+      int m_fileID;
+      
   };
   
+  // Allow the threadedSetup class to access private members.
+  friend class threadedSetup;
 };
 
 

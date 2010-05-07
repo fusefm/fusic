@@ -54,21 +54,33 @@ sound::sound(int fileID)
 // public getter implimentation.
 QString sound::getTitle()
 {
+  // Attempt to lock and unlock the mutex to ensure that a threaded stup has finished.
+  mutex.lock();
+  mutex.unlock();
   return title;
 }
 
 QString sound::getLocation()
 {
+  // Attempt to lock and unlock the mutex to ensure that a threaded stup has finished.
+  mutex.lock();
+  mutex.unlock();
   return location;
 }
 
 double sound::getDuration()
 {
+  // Attempt to lock and unlock the mutex to ensure that a threaded stup has finished.
+  mutex.lock();
+  mutex.unlock();
   return duration;
 }
 
 bool sound::isValid()
 {
+  // Attempt to lock and unlock the mutex to ensure that a threaded stup has finished.
+  mutex.lock();
+  mutex.unlock();
   return valid;
 }
 
@@ -86,8 +98,24 @@ bool sound::extraSetup(QSqlDatabase& db)
   return true;
 }
 
+sound::threadedSetup::threadedSetup(sound* s, int fileID)
+{
+  m_Sound = s;
+}
+
+void sound::threadedSetup::run()
+{
+    bool res = m_Sound->doSetup(m_fileID);
+    
+    // Emit the finished signal.
+    emit m_Sound->setupComplete(res);
+}
+
+
 bool sound::doSetup(int fileID)
 {
+  // Lock the mutex until setup is complete.
+  mutex.lock();
   QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
   
   // Set database settings.
@@ -99,7 +127,10 @@ bool sound::doSetup(int fileID)
   
   // Attempt connection.
   if(!db.open())
+  {
+    mutex.unlock();
     return false;
+  }
   
   // Do the query.  
   QSqlQuery query("SELECT * FROM sounds  WHERE sound_ID = ?");
@@ -110,6 +141,7 @@ bool sound::doSetup(int fileID)
   if(query.size() < 1)
   {
     db.close();
+    mutex.unlock();
     return false;
   }
   
@@ -130,11 +162,13 @@ bool sound::doSetup(int fileID)
   if(!extraSetup(db))
   {
     db.close();
+    mutex.unlock();
     return false;
   }
   
   // Close the connection.
   db.close();
+  mutex.unlock();
   return true;  
 }
 
