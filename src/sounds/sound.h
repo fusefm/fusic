@@ -161,15 +161,13 @@ private:
    */
   class threadedSetup : public QThread
   {
-      threadedSetup(sound* s, int fileID);
-      
     public:
+      threadedSetup(sound* s, int fileID);
       virtual void run();
-      
+
     private:
       sound* m_Sound;
-      int m_fileID;
-      
+      int m_fileID;      
   };
   
   // Allow the threadedSetup class to access private members.
