@@ -26,6 +26,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QVariant>
+#include <QMutexLocker>
 
 // For documentation, see sound.h
 
@@ -120,7 +121,7 @@ void sound::setFileID(int fileID)
 bool sound::doSetup(int fileID)
 {
   // Lock the mutex until setup is complete.
-  mutex.lock();
+  QMutexLocker locker(&mutex);
   QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
   
   // Set database settings.
@@ -132,10 +133,8 @@ bool sound::doSetup(int fileID)
   
   // Attempt connection.
   if(!db.open())
-  {
-    mutex.unlock();
     return false;
-  }
+
   
   // Do the query.  
   QSqlQuery query("SELECT * FROM sounds  WHERE sound_ID = ?");
@@ -146,7 +145,6 @@ bool sound::doSetup(int fileID)
   if(query.size() < 1)
   {
     db.close();
-    mutex.unlock();
     return false;
   }
   
@@ -167,13 +165,11 @@ bool sound::doSetup(int fileID)
   if(!extraSetup(db, fileID))
   {
     db.close();
-    mutex.unlock();
     return false;
   }
   
   // Close the connection.
   db.close();
-  mutex.unlock();
   return true;  
 }
 
