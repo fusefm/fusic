@@ -26,10 +26,11 @@
 
 void soundTest::initSettings()
 {
-  fusicSettings::DBSettings::setDatabase(QString("fusic_tests"));
-  fusicSettings::DBSettings::setHost(QString("localhost"));
-  fusicSettings::DBSettings::setPassword(QString("system12"));
-  fusicSettings::DBSettings::setUserName(QString("root"));
+  QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+  db.setDatabaseName(QString("fusic_tests"));
+  db.setHostName("localhost");
+  db.setUserName("root");
+  db.setPassword("system12");
 }
 
 void soundTest::initFakeSettings()
@@ -60,8 +61,6 @@ void soundTest::testSoundSetup()
 
 void soundTest::testSoundAsyncSetup()
 {
-  // Initalise the settings.
-  initSettings();
   
   sound theSound;
   
@@ -79,7 +78,11 @@ void soundTest::testSoundAsyncSetup()
 }
 void soundTest::testSoundInvalidation()
 {
-  initFakeSettings();
+  // Kill the database.
+ QSqlDatabase db = QSqlDatabase::database();
+ db.close();
+ db.setHostName("foo");
+ 
   sound theSound;
   sound anotherSound(1);
   // Ensure the object is not valid.
