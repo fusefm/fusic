@@ -42,14 +42,7 @@ sound::sound() :
 
 sound::sound(int fileID)
 {
-  if(!doSetup(fileID))
-  {
-    invalidate();
-  }
-  else
-  {
-    valid = true;
-  }
+  doSetup(fileID);
 }
 
 // public getter implimentation.
@@ -102,6 +95,7 @@ bool sound::extraSetup(QSqlDatabase& db, int soundID)
 sound::threadedSetup::threadedSetup(sound* s, int fileID)
 {
   m_Sound = s;
+  m_fileID = fileID;
 }
 
 void sound::threadedSetup::run()
@@ -122,22 +116,15 @@ bool sound::doSetup(int fileID)
 {
   // Lock the mutex until setup is complete.
   QMutexLocker locker(&mutex);
-  QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+  QSqlDatabase db = QSqlDatabase::database();
   
-  // Set database settings.
-  db.setDatabaseName(fusicSettings::DBSettings::getDatabase());
-  db.setHostName(fusicSettings::DBSettings::getHost());
-  db.setUserName(fusicSettings::DBSettings::getUserName());
-  db.setPassword(fusicSettings::DBSettings::getPassword());
-  db.setPort(fusicSettings::DBSettings::getPort());
-  
-  // Attempt connection.
-  if(!db.open())
-    return false;
-
-  
+  // Ensure we have an open database
+  if(!db.isOpen())
+    if(!db.open())
+      return false;
+	
   // Do the query.  
-  QSqlQuery query("SELECT * FROM sounds  WHERE sound_ID = ?");
+  QSqlQuery query("SELECT * FROM sounds  WHERE sound_ID = ?", db);
   query.bindValue(0, fileID);
   query.exec();
   
@@ -170,7 +157,9 @@ bool sound::doSetup(int fileID)
   
   // Close the connection.
   db.close();
+  
+  // We are now a valid object.
+  valid = true;
   return true;  
 }
-
-
+#include "sound.moc"
