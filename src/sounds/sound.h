@@ -62,6 +62,8 @@ class sound : public QObject
 {
   Q_OBJECT
   
+  public:
+
   /**
    * Construct an empty sound object.
    */
@@ -73,8 +75,6 @@ class sound : public QObject
    * @param fileID The file ID for the object to represent.
    */
   sound(int fileID);
-
-public:
 
   // Public getter functions.
   /**
