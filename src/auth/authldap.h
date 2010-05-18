@@ -20,7 +20,7 @@
 #ifndef AUTHLDAP_H
 #define AUTHLDAP_H
 
-#include <../../home/matthew/Documents/Development/fusic/src/auth/authbase.h>
+#include <authbase.h>
 
 
 class authLDAP : public authBase

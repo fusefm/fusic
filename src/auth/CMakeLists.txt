@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 find_package(Qt4 REQUIRED)
 find_package(OpenLDAP REQUIRED)
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${fusic_SOURCE_DIR}/src/auth)
 
 set(auth_SRCS authldap.cpp authbase.cpp)
 qt4_automoc(${auth_SRCS})
