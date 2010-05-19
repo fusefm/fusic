@@ -30,8 +30,8 @@ void authBase::run()
 
 void authBase::setCredentials(const QString& userID, const QString& password)
 {
-    m_password = password;
-    m_userID = userID;
+    mPassword = password;
+    mUserID = userID;
 }
 
 void authBase::doAuth()
@@ -41,12 +41,12 @@ void authBase::doAuth()
 
 const QString authBase::getAuthor()
 {
-  return m_author;
+  return mAuthor;
 }
 
 const QString authBase::getDescription()
 {
-  return m_description;
+  return mDescription;
 }
 
 const QDialog* authBase::getsettingsDialog(QWidget* parent)
@@ -56,11 +56,11 @@ const QDialog* authBase::getsettingsDialog(QWidget* parent)
 
 void authBase::setAuthor(QString author)
 {
-  m_author = author;
+  mAuthor = author;
 }
 
 void authBase::setDescription(QString description)
 {
-  m_description = description;
+  mDescription = description;
 }
 

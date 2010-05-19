@@ -139,16 +139,16 @@ protected:
   /**
    * The user ID to authenticate against.
    */
-  QString m_userID;
+  QString mUserID;
   
   /**
    * The password to authenticate against.
    */
-  QString m_password;
+  QString mPassword;
   
 private:
-  QString m_author;
-  QString m_description;
+  QString mAuthor;
+  QString mDescription;
 };
 
 #endif // AUTHBASE_H
