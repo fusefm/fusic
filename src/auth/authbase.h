@@ -27,6 +27,7 @@
 
 /**
  * @short A pure virtual class for defining how authentication should work.
+ * 
  * This is a pure virtual class that should be used for creating authentication
  * modules for fusic. This is done easily via overwriting the doAuth() function.
  * There is also functions for setAuthor() and setDescription() that allow you 
