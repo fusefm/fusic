@@ -44,6 +44,7 @@
  */
 class authBase : public QThread
 {
+  Q_OBJECT
   // Constructor.
   authBase(QObject* parent = 0);
 public:
@@ -118,7 +119,7 @@ signals:
    * @param msg A short error message saying what went wrong.
    */
   void authError(const QString msg);
-  
+
 protected:
   
   /**

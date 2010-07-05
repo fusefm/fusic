@@ -51,7 +51,7 @@ const QString authBase::getDescription()
 
 const QDialog* authBase::getsettingsDialog(QWidget* parent)
 {
-  return new QDialog(parent);
+  return NULL;
 }
 
 void authBase::setAuthor(QString author)
@@ -63,4 +63,4 @@ void authBase::setDescription(QString description)
 {
   mDescription = description;
 }
-
+#include "authbase.moc"
