@@ -45,9 +45,9 @@
 class authBase : public QThread
 {
   Q_OBJECT
+public:
   // Constructor.
   authBase(QObject* parent = 0);
-public:
   
   /**
    * Authentication modules should put the code here that actually does
