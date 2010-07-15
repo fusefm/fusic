@@ -121,5 +121,23 @@ public:
   static void setPort(int port);
 };
 
+/**
+ * Misc settings for fusic.
+ * @see fusicSettings
+ */
+class misc
+{
+    /**
+     * Return weather fusic has been setup before.
+     * @returns A bool, false if fusic has not been setup, true otherwise.
+     */
+    static bool hasCompletedInitalSetup();
+
+    /**
+     * Sets that the inital fusic setup has ran and completed.
+     */
+    static void setHasCompletedInitalSetup();
+};
+
 }// namespace fusicSettings
 #endif // FUSICSETTINGS_H

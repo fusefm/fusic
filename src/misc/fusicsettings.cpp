@@ -84,3 +84,15 @@ void fusicSettings::DBSettings::setUserName(QString username)
   QSettings set;
   set.setValue("DBSettings/UserName", username);
 }
+
+bool fusicSettings::misc::hasCompletedInitalSetup()
+{
+    QSettings set;
+    return set.value("Misc/HasRanBefore", false).toBool();
+}
+
+void fusicSettings::misc::setHasCompletedInitalSetup()
+{
+    QSettings set;
+    set.setValue("Misc/HasRanBefore", true);
+}
