@@ -127,6 +127,7 @@ public:
  */
 class misc
 {
+  public:
     /**
      * Return weather fusic has been setup before.
      * @returns A bool, false if fusic has not been setup, true otherwise.

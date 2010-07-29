@@ -4,9 +4,11 @@ find_package(Qt4 REQUIRED)
 add_subdirectory(sounds)
 add_subdirectory(misc)
 add_subdirectory(auth)
+add_subdirectory(wizards)
+
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 set(fusic_SRCS fusic.cpp main.cpp)
 qt4_automoc(${fusic_SRCS})
 add_executable(fusic ${fusic_SRCS})
-target_link_libraries(fusic ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+target_link_libraries(fusic ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} fusic_wizard fusic_misc)
