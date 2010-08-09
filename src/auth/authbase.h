@@ -59,6 +59,12 @@ public:
    * Use the protected m_userID and m_password members for credentials.
    */
   virtual void doAuth();
+
+  /**
+   * Return the name of the module.
+   * @returns A QString set to the name of the module.
+   */
+  virtual QString getName();
   
   /**
    * Modules should setup a UI for setting settings for that module.
