@@ -64,7 +64,7 @@ public:
    * Return the name of the module.
    * @returns A QString set to the name of the module.
    */
-  virtual QString getName();
+  virtual QString getName() = 0;
   
   /**
    * Modules should setup a UI for setting settings for that module.
