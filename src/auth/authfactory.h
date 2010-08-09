@@ -28,7 +28,8 @@
 
 class authFactory
 {
-  static QList<authBase*> getAuthModules();
+  public:
+    static QList<authBase*> getAuthModules();
 };
 
 #endif // AUTHFACTORY_H
