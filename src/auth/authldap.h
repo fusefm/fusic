@@ -28,6 +28,7 @@ class authLDAP : public authBase
 public:
     virtual void doAuth();
     virtual const QDialog* getsettingsDialog(QWidget* parent);
+    virtual QString getName();
     
 private:
   const QString getLDAPErrorString(int errnumber);

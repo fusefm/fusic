@@ -27,6 +27,7 @@ class authSQL : public authBase
 public:
   authSQL();
   virtual void doAuth();
+  virtual QString getName();
 
 private:
   QString getDatabaseName();

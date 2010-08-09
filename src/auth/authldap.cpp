@@ -154,6 +154,12 @@ void authLDAP::doAuth()
     emit finishedAuth(false);
 }
 
+QString authLDAP::getName()
+{
+    return "LDAP Authentication";
+}
+
+
 const QDialog* authLDAP::getsettingsDialog(QWidget* parent)
 {
   return authBase::getsettingsDialog(parent);

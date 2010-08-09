@@ -71,6 +71,12 @@ void authSQL::doAuth()
     emit finishedAuth(true);
 }
 
+QString authSQL::getName()
+{
+    return "MySQL Authentication";
+}
+
+
 QString authSQL::getUserName()
 {
   QSettings set;
