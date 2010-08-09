@@ -28,6 +28,8 @@ initialwizard_introduction::initialwizard_introduction(QWidget* parent): QWizard
   QLabel* introText = new QLabel;
   introText->setText("Welcome to Fusic. The next few pages will"
   " guide you through setting up the database and authentication settings.");
-  
+  introText->setWordWrap(true);
   QVBoxLayout* layout = new QVBoxLayout;
+  layout->addWidget(introText);
+  setLayout(layout);
 }

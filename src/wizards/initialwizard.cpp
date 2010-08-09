@@ -9,7 +9,7 @@
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    MERCHANTABILITY or	 FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
@@ -19,8 +19,10 @@
 
 #include "initialwizard.h"
 #include "initialwizard_introduction.h"
+#include "initialwizard_mysqlsetup.h"
 
 initialWizard::initialWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(parent, flags)
 {
   addPage(new initialwizard_introduction);
+  addPage(new initialwizard_mysqlSetup);
 }
