@@ -3,10 +3,10 @@ find_package(Qt4 REQUIRED)
 find_package(OpenLDAP)
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${fusic_SOURCE_DIR}/src/auth)
 
+set(auth_SRCS authbase.cpp authsql.cpp)
+
 IF(OpenLDAP_FOUND)
-  set(auth_SRCS authldap.cpp authsql.cpp authbase.cpp)
-ELSE(OpenLDAP_FOUND)
-  set(auth_SRCS authsql.cpp authbase.cpp)
+  set(auth_SRCS ${auth_SRCS} authldap.cpp)
 ENDIF(OpenLDAP_FOUND)
 
 qt4_automoc(${auth_SRCS})
