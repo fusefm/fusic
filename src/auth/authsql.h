@@ -28,7 +28,9 @@ public:
   authSQL();
   virtual void doAuth();
   virtual QString getName();
-
+  virtual const QString getAuthor();
+  virtual const QString getDescription();
+  virtual const QDialog* getsettingsDialog(QWidget* parent);
 private:
   QString getDatabaseName();
   QString getUserName();

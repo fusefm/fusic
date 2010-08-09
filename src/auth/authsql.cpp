@@ -29,11 +29,6 @@
 
 authSQL::authSQL()
 {
-  // Set author and description.
-  setAuthor("Matthew Leach");
-  setDescription("Authenticate against a SQL table containing a"
-                 " username and MD5 password column.");
-
 }
 
 void authSQL::doAuth()
@@ -76,6 +71,21 @@ QString authSQL::getName()
     return "MySQL Authentication";
 }
 
+const QString authSQL::getAuthor()
+{
+  return "Matthew Leach";
+}
+
+const QString authSQL::getDescription()
+{
+  return "Authenticates a MySQL server with a username and MD5"
+    " password field.";
+}
+
+const QDialog* authSQL::getsettingsDialog(QWidget* parent)
+{
+  return new QDialog;
+}
 
 QString authSQL::getUserName()
 {

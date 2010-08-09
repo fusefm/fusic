@@ -58,7 +58,7 @@ public:
    *
    * Use the protected m_userID and m_password members for credentials.
    */
-  virtual void doAuth();
+  virtual void doAuth() = 0;
 
   /**
    * Return the name of the module.
@@ -76,14 +76,14 @@ public:
    * @returns Should return a pointer to a new QDialog that has been setup with the
    * nesseccry widgets and setting save functions.
    */
-  virtual const QDialog* getsettingsDialog(QWidget* parent);
+  virtual const QDialog* getsettingsDialog(QWidget* parent) = 0;
   
   /**
    * Return the author of the module.
    * 
    * @returns A QString set to the author of the module.
    */
-  const QString getAuthor();
+  virtual const QString getAuthor() = 0;
   
   /**
    * Return the description of the module.
@@ -91,7 +91,7 @@ public:
    * @returns a QString that is set to a breif description to
    * what kind authentication the module provides.
    */
-  const QString getDescription();
+  virtual const QString getDescription() = 0;
   
   /**
    * Set the user's credentials to authenticate against. 
@@ -129,21 +129,6 @@ signals:
 protected:
   
   /**
-   * Set the author of the module.
-   *
-   * @param author The author of the module.
-   */
-  void setAuthor(const QString author);
-  
-  /**
-   * Set the description of the module. Provide a breif
-   * description as to what kind of authentication the module does.
-   *
-   * @param description The description of the module.
-   */
-  void setDescription(const QString description);
-  
-  /**
    * The user ID to authenticate against.
    */
   QString mUserID;
@@ -152,10 +137,6 @@ protected:
    * The password to authenticate against.
    */
   QString mPassword;
-  
-private:
-  QString mAuthor;
-  QString mDescription;
 };
 
 #endif // AUTHBASE_H

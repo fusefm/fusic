@@ -29,7 +29,8 @@ public:
     virtual void doAuth();
     virtual const QDialog* getsettingsDialog(QWidget* parent);
     virtual QString getName();
-    
+    virtual const QString getAuthor();
+    virtual const QString getDescription();
 private:
   const QString getLDAPErrorString(int errnumber);
   bool getLdapSettings();

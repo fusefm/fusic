@@ -39,28 +39,9 @@ void authBase::doAuth()
   emit authError("authBase should not be used for authentication.");
 }
 
-const QString authBase::getAuthor()
-{
-  return mAuthor;
-}
-
-const QString authBase::getDescription()
-{
-  return mDescription;
-}
-
 const QDialog* authBase::getsettingsDialog(QWidget* parent)
 {
   return NULL;
 }
 
-void authBase::setAuthor(QString author)
-{
-  mAuthor = author;
-}
-
-void authBase::setDescription(QString description)
-{
-  mDescription = description;
-}
 #include "authbase.moc"

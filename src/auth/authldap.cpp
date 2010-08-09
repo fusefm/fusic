@@ -159,6 +159,15 @@ QString authLDAP::getName()
     return "LDAP Authentication";
 }
 
+const QString authLDAP::getAuthor()
+{
+  return "Matthew Leach";
+}
+
+const QString authLDAP::getDescription()
+{
+  return "Authenticate against an openLDAP server.";
+}
 
 const QDialog* authLDAP::getsettingsDialog(QWidget* parent)
 {
