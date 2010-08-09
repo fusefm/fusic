@@ -12,4 +12,7 @@ ENDIF(OpenLDAP_FOUND)
 
 qt4_automoc(${auth_SRCS})
 add_library(fusic_auth SHARED ${auth_SRCS})
-target_link_libraries(fusic_auth ${QT_QTSQL_LIBRARY} ${QT_QTCORE_LIBRARY})
+target_link_libraries(fusic_auth
+                      ${QT_QTSQL_LIBRARY}
+                      ${QT_QTCORE_LIBRARY}
+                      ${OpenLDAP_LIBRARY})
