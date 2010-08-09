@@ -6,6 +6,7 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${fusic_SOURCE_DI
 set(auth_SRCS authbase.cpp authsql.cpp authfactory.cpp)
 
 IF(OpenLDAP_FOUND)
+  add_definitions(-DLDAP_AUTH)
   set(auth_SRCS ${auth_SRCS} authldap.cpp)
 ENDIF(OpenLDAP_FOUND)
 
