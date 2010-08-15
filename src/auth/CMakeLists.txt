@@ -4,15 +4,14 @@ find_package(OpenLDAP)
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${fusic_SOURCE_DIR}/src/auth)
 
 set(auth_SRCS authbase.cpp authsql.cpp authfactory.cpp)
+set(auth_LINK_LIBRARY ${QT_QTSQL_LIBRARY} ${QT_QTCORE_LIBRARY})
 
 IF(OpenLDAP_FOUND)
   add_definitions(-DLDAP_AUTH)
   set(auth_SRCS ${auth_SRCS} authldap.cpp)
+  set(auth_LINK_LIBRARY ${auth_LINK_LIBRARY} ${OpenLDAP_LIBRARY})
 ENDIF(OpenLDAP_FOUND)
 
 qt4_automoc(${auth_SRCS})
 add_library(fusic_auth SHARED ${auth_SRCS})
-target_link_libraries(fusic_auth
-                      ${QT_QTSQL_LIBRARY}
-                      ${QT_QTCORE_LIBRARY}
-                      ${OpenLDAP_LIBRARY})
+target_link_libraries(fusic_auth ${auth_LINK_LIBRARY})
