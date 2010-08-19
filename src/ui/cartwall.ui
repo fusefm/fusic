@@ -67,7 +67,7 @@
        <number>2</number>
       </property>
       <item row="0" column="1">
-       <widget class="QPushButton" name="btnFuseCart11">
+       <widget class="QPushButton" name="btnTopCart11">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -99,7 +99,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="btnFuseCart12">
+       <widget class="QPushButton" name="btnTopCart12">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -131,7 +131,7 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QPushButton" name="btnFuseCart13">
+       <widget class="QPushButton" name="btnTopCart13">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -163,7 +163,7 @@
        </widget>
       </item>
       <item row="0" column="5">
-       <widget class="QPushButton" name="btnFuseCart15">
+       <widget class="QPushButton" name="btnTopCart15">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -195,7 +195,7 @@
        </widget>
       </item>
       <item row="0" column="6">
-       <widget class="QPushButton" name="btnFusePage5">
+       <widget class="QPushButton" name="btnTopPage5">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -229,7 +229,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QPushButton" name="btnFusePage2">
+       <widget class="QPushButton" name="btnTopPage2">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -263,7 +263,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QPushButton" name="btnFuseCart21">
+       <widget class="QPushButton" name="btnTopCart21">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -295,7 +295,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QPushButton" name="btnFuseCart22">
+       <widget class="QPushButton" name="btnTopCart22">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -327,7 +327,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="1" column="3">
-       <widget class="QPushButton" name="btnFuseCart23">
+       <widget class="QPushButton" name="btnTopCart23">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -359,7 +359,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="1" column="4">
-       <widget class="QPushButton" name="btnFuseCart24">
+       <widget class="QPushButton" name="btnTopCart24">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -391,7 +391,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="1" column="5">
-       <widget class="QPushButton" name="btnFuseCart25">
+       <widget class="QPushButton" name="btnTopCart25">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -423,7 +423,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="1" column="6">
-       <widget class="QPushButton" name="btnFusePage6">
+       <widget class="QPushButton" name="btnTopPage6">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -457,7 +457,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QPushButton" name="btnFusePage3">
+       <widget class="QPushButton" name="btnTopPage3">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -491,7 +491,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QPushButton" name="btnFuseCart31">
+       <widget class="QPushButton" name="btnTopCart31">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -523,7 +523,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QPushButton" name="btnFuseCart32">
+       <widget class="QPushButton" name="btnTopCart32">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -555,7 +555,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="QPushButton" name="btnFuseCart33">
+       <widget class="QPushButton" name="btnTopCart33">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -587,7 +587,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="2" column="4">
-       <widget class="QPushButton" name="btnFuseCart34">
+       <widget class="QPushButton" name="btnTopCart34">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -619,7 +619,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="2" column="5">
-       <widget class="QPushButton" name="btnFuseCart35">
+       <widget class="QPushButton" name="btnTopCart35">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -651,7 +651,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="2" column="6">
-       <widget class="QPushButton" name="btnFusePage7">
+       <widget class="QPushButton" name="btnTopPage7">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -685,7 +685,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QPushButton" name="btnFusePage4">
+       <widget class="QPushButton" name="btnTopPage4">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -719,7 +719,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QPushButton" name="btnFuseCart41">
+       <widget class="QPushButton" name="btnTopCart41">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -751,7 +751,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="3" column="2">
-       <widget class="QPushButton" name="btnFuseCart42">
+       <widget class="QPushButton" name="btnTopCart42">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -783,7 +783,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="3" column="3">
-       <widget class="QPushButton" name="btnFuseCart43">
+       <widget class="QPushButton" name="btnTopCart43">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -815,7 +815,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="3" column="4">
-       <widget class="QPushButton" name="btnFuseCart44">
+       <widget class="QPushButton" name="btnTopCart44">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -850,7 +850,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="3" column="5">
-       <widget class="QPushButton" name="btnFuseCart45">
+       <widget class="QPushButton" name="btnTopCart45">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -882,7 +882,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="3" column="6">
-       <widget class="QPushButton" name="btnFusePage8">
+       <widget class="QPushButton" name="btnTopPage8">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -916,7 +916,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="0" column="4">
-       <widget class="QPushButton" name="btnFuseCart14">
+       <widget class="QPushButton" name="btnTopCart14">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -948,7 +948,7 @@ color: rgb(0,255,0);</string>
        </widget>
       </item>
       <item row="0" column="0">
-       <widget class="QPushButton" name="btnFusePage1">
+       <widget class="QPushButton" name="btnTopPage1">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
