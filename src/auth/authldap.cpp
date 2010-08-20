@@ -18,6 +18,7 @@
 */
 
 #include "authldap.h"
+#include "authldapdialog.h"
 
 #include <ldap.h>
 #include <QSettings>
@@ -171,7 +172,7 @@ const QString authLDAP::getDescription()
 
 QDialog* authLDAP::getsettingsDialog(QWidget* parent)
 {
-  return authBase::getsettingsDialog(parent);
+  return new authLDAPDialog(parent);
 }
 
 const QString authLDAP::getLDAPErrorString(int errnumber)
