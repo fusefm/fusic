@@ -143,7 +143,7 @@ private:
    * @return A bool indicating weather the setup was successful or not. If a false is returned,
    * it will invalidate this sound object.
    */
-  virtual bool extraSetup(QSqlDatabase& db, int soundID);
+  virtual bool extraSetup(QSqlDatabase& db, int soundID) = 0;
   
   // Private storage vars:
   QString location;

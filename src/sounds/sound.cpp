@@ -87,11 +87,6 @@ void sound::invalidate()
 
 // Private member implimentation.
 
-bool sound::extraSetup(QSqlDatabase& db, int soundID)
-{
-  return true;
-}
-
 sound::threadedSetup::threadedSetup(sound* s, int fileID)
 {
   m_Sound = s;
