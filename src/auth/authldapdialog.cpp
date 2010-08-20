@@ -18,8 +18,75 @@
 */
 
 #include "authldapdialog.h"
+#include <QSettings>
+#include <QMessageBox>
 
 authLDAPDialog::authLDAPDialog(QWidget* parent, Qt::WindowFlags f): QDialog(parent, f)
 {
   ui.setupUi(this);
+
+  connect(ui.okCancelButtonBox, SIGNAL(clicked(QAbstractButton*)),
+          this, SLOT(okOrCancelButtonPress(QAbstractButton*)));
 }
+
+void authLDAPDialog::okOrCancelButtonPress(QAbstractButton* button)
+{
+  // Check if it's the Ok button:
+  if(ui.okCancelButtonBox->buttonRole(button) == QDialogButtonBox::AcceptRole)
+  {
+    if(validate())
+    {
+      // Save settings:
+      QSettings set;
+
+      // Compose the LDAP URI from the settings.
+      QString ldapURI = "ldap://";
+      ldapURI += ui.hostnameEdit->text();
+      if(!ui.portEdit->text().isEmpty())
+      {
+        ldapURI += ":";
+        ldapURI += ui.portEdit->text();
+      }
+
+      // Set the value.
+      set.setValue("LDAPSettings/URI", ldapURI);
+      set.setValue("LDAPSettings/BindAttribute", ui.bindAttributeEdit->text());
+      set.setValue("LDAPSettings/BaseDN", ui.baseDNEdit->text());
+
+      // Close the dialog.
+      accept();
+    }
+  }
+}
+
+bool authLDAPDialog::validate()
+{
+  QSettings set;
+  if(ui.hostnameEdit->text().isEmpty())
+  {
+    QMessageBox::critical(this, "Error", "Please fill in the hostname field.");
+    return false;
+  }
+  else if(ui.baseDNEdit->text().isEmpty())
+  {
+    QMessageBox::critical(this, "Error", "Please fill in the Base DN field.");
+    return false;
+  }
+  else if(ui.bindAttributeEdit->text().isEmpty())
+  {
+    QMessageBox::critical(this, "Error", "Please fill in the Bind Attribute field.");
+    return false;
+  }
+  else if(set.value("LDAPSettings/AccessGroups").toStringList().isEmpty())
+  {
+    QMessageBox::critical(this, "Error", "Please ensure that at least one access"
+      " group is selected.");
+      return false;
+  }
+  else
+  {
+    return true;
+  }
+}
+
+#include "authldapdialog.moc"
