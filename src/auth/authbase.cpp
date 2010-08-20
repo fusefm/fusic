@@ -39,7 +39,7 @@ void authBase::doAuth()
   emit authError("authBase should not be used for authentication.");
 }
 
-const QDialog* authBase::getsettingsDialog(QWidget* parent)
+QDialog* authBase::getsettingsDialog(QWidget* parent)
 {
   return NULL;
 }

@@ -24,6 +24,7 @@
 #include <QMap>
 #include <QThread>
 #include <QDialog>
+#include <QMetaType>
 
 /**
  * @short A pure virtual class for defining how authentication should work.
@@ -76,7 +77,7 @@ public:
    * @returns Should return a pointer to a new QDialog that has been setup with the
    * nesseccry widgets and setting save functions.
    */
-  virtual const QDialog* getsettingsDialog(QWidget* parent) = 0;
+  virtual QDialog* getsettingsDialog(QWidget* parent) = 0;
   
   /**
    * Return the author of the module.
@@ -138,5 +139,7 @@ protected:
    */
   QString mPassword;
 };
+
+Q_DECLARE_METATYPE(authBase*)
 
 #endif // AUTHBASE_H

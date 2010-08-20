@@ -27,7 +27,7 @@ class authLDAP : public authBase
 
 public:
     virtual void doAuth();
-    virtual const QDialog* getsettingsDialog(QWidget* parent);
+    virtual QDialog* getsettingsDialog(QWidget* parent);
     virtual QString getName();
     virtual const QString getAuthor();
     virtual const QString getDescription();

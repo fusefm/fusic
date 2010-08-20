@@ -169,7 +169,7 @@ const QString authLDAP::getDescription()
   return "Authenticate against an openLDAP server.";
 }
 
-const QDialog* authLDAP::getsettingsDialog(QWidget* parent)
+QDialog* authLDAP::getsettingsDialog(QWidget* parent)
 {
   return authBase::getsettingsDialog(parent);
 }

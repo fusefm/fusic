@@ -82,7 +82,7 @@ const QString authSQL::getDescription()
     " password field.";
 }
 
-const QDialog* authSQL::getsettingsDialog(QWidget* parent)
+QDialog* authSQL::getsettingsDialog(QWidget* parent)
 {
   return new QDialog;
 }
