@@ -33,79 +33,48 @@
 
 initialwizard_mysqlSetup::initialwizard_mysqlSetup(QWidget* parent): QWizardPage(parent)
 {
-  setTitle("MySQL Setup");
-  setSubTitle("Set basic MySQL settings an attempt a connection.");
-  
-  QVBoxLayout* mainLayout = new QVBoxLayout;
-  
-  // Server settings.
-  QGroupBox *serverBox = new QGroupBox("Server Settings");
-  
-  editUsername = new QLineEdit;
-  editPassword = new QLineEdit;
-  editPassword->setEchoMode(QLineEdit::Password);
-  editHost = new QLineEdit;
-  editPort = new QLineEdit;
-  
-  QFormLayout* serverFormLayout = new QFormLayout;
-  serverFormLayout->addRow("&Username:", editUsername);
-  serverFormLayout->addRow("&Password:", editPassword);
-  serverFormLayout->addRow("&Hostname:", editHost);
-  serverFormLayout->addRow("&Port:", editPort);
-  
-  registerField("db_username*", editUsername);
-  registerField("db_password", editPassword);
-  registerField("db_host*", editHost);
-  registerField("db_port", editPort);
-  
-  serverBox->setLayout(serverFormLayout);
-  
-  // Table Settings.
-  QGroupBox * tableBox = new QGroupBox("Table Settings");
-  
-  editDatabase = new QLineEdit;
-  registerField("db_database*", editDatabase);
-  QPushButton* dbBrowse = new QPushButton("...");
-  QHBoxLayout* browseLayout = new QHBoxLayout;
-  browseLayout->addWidget(editDatabase);
-  browseLayout->addWidget(dbBrowse);
-  connect(dbBrowse, SIGNAL(clicked(bool)), this, SLOT(showDBBrowser(bool)));
-  
-  QFormLayout* tableFormLayout = new QFormLayout;
-  tableFormLayout->addRow("Database:", browseLayout);
-  
-  tableBox->setLayout(tableFormLayout);
-  
-  mainLayout->addWidget(serverBox);
-  mainLayout->addWidget(tableBox);
-  setLayout(mainLayout);
+  ui.setupUi(this);
+
+  // Set password echo mode.
+  ui.passwordEdit->setEchoMode(QLineEdit::Password);
+
+  // Register fields.
+  registerField("db_username*", ui.usernameEdit);
+  registerField("db_password", ui.passwordEdit);
+  registerField("db_host*", ui.hostnameEdit);
+  registerField("db_port", ui.portEdit);
+  registerField("db_database*", ui.databaseEdit);
+
+  connect(ui.databaseBrowseButton, SIGNAL(clicked(bool)),
+          this, SLOT(showDBBrowser(bool)));
+
 }
 
 void initialwizard_mysqlSetup::showDBBrowser(bool checked)
 {
-  if(editHost->text().isEmpty() || editUsername->text().isEmpty())
+  if(ui.hostnameEdit->text().isEmpty() || ui.usernameEdit->text().isEmpty())
   {
     QMessageBox::critical(this, "Error", "Please enter at least a username and a hostname for the MySQL server.");
   }
   else
   {
     DatabaseChooser* chooserDlg = new DatabaseChooser(this,0,
-                                                      editUsername->text(),
-                                                      editPassword->text(),
-                                                      editHost->text(),
-                                                      editPort->text().toInt());
+                                                      ui.usernameEdit->text(),
+                                                      ui.passwordEdit->text(),
+                                                      ui.hostnameEdit->text(),
+                                                      ui.portEdit->text().toInt());
     chooserDlg->exec();
-    editDatabase->setText(chooserDlg->selectedDatabase);
+    ui.databaseEdit->setText(chooserDlg->selectedDatabase);
   }
 }
 
 void initialwizard_mysqlSetup::initializePage()
 {
   // Set default values.
-  editUsername->setText(fusicSettings::DBSettings::getUserName());
-  editPassword->setText(fusicSettings::DBSettings::getPassword());
-  editHost->setText(fusicSettings::DBSettings::getHost());
-  editPort->setText(QString(fusicSettings::DBSettings::getPort()));
+  ui.usernameEdit->setText(fusicSettings::DBSettings::getUserName());
+  ui.passwordEdit->setText(fusicSettings::DBSettings::getPassword());
+  ui.hostnameEdit->setText(fusicSettings::DBSettings::getHost());
+  ui.portEdit->setText(QString(fusicSettings::DBSettings::getPort()));
 }
 
 

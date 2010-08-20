@@ -20,6 +20,9 @@
 #ifndef INTROWIZARD_MYSQLSETUP_H
 #define INTROWIZARD_MYSQLSETUP_H
 
+// Local Includes:
+#include "ui_initialwizard_mysqlsetup.h"
+
 // Qt Includes:
 #include <QWizard>
 #include <QLineEdit>
@@ -49,11 +52,7 @@ class initialwizard_mysqlSetup : public QWizardPage
     void showDBBrowser(bool checked);
 
   private:
-    QLineEdit* editUsername; 
-    QLineEdit* editPassword;
-    QLineEdit* editHost;
-    QLineEdit* editPort;
-    QLineEdit* editDatabase;
+    Ui::MySQLWizardPage ui;
 };
 
 #endif // INTROWIZARD_MYSQLSETUP_H

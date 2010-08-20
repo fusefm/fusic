@@ -5,7 +5,8 @@ include_directories(${QT_INCLUDES}
                     ${fusic_SOURCE_DIR}/src/auth/
                     ${fusic_SOURCE_DIR}/src/misc/)
 
-set(wizard_GUI_SRCS initialwizard_authsetup.ui)
+set(wizard_GUI_SRCS initialwizard_authsetup.ui
+                    initialwizard_mysqlsetup.ui)
 
 set(wizard_SRCS databasechooser.cpp
                 initialwizard_mysqlsetup.cpp
