@@ -58,10 +58,10 @@ public:
   
 private:    
   bool extraSetup(QSqlDatabase& db, int soundID);
-  QString Artist;
-  QString Album;
-  QString Genre;
-  double Intro;
+  QString artist;
+  QString album;
+  QString genre;
+  double intro;
 };
 
 #endif // SONG_H

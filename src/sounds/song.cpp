@@ -31,28 +31,28 @@ QString song::getAlbum()
 {
     mutex.lock();
     mutex.unlock();
-    return Album;
+    return album;
 }
 
 QString song::getArtist()
 {
     mutex.lock();
     mutex.unlock();
-    return Artist;
+    return artist;
 }
 
 double song::getIntro()
 {
     mutex.lock();
     mutex.unlock();
-    return Intro;
+    return intro;
 }
 
 QString song::getGenre()
 {
     mutex.lock();
     mutex.unlock();
-    return Genre;
+    return genre;
 }
 
 // Do extra setup for extended properties.
@@ -77,10 +77,10 @@ bool song::extraSetup(QSqlDatabase &db, int soundID)
     int fIDIntro = query.record().indexOf("intro");
 
     // Get the data.
-    Genre = query.value(fIDGenre).toString();
-    Artist = query.value(fIDArtist).toString();
-    Album = query.value(fIDAlbum).toString();
-    Intro = query.value(fIDIntro).toDouble();
+    genre = query.value(fIDGenre).toString();
+    artist = query.value(fIDArtist).toString();
+    album = query.value(fIDAlbum).toString();
+    intro = query.value(fIDIntro).toDouble();
 
     // All is good.
     return true;
