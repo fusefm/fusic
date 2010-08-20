@@ -20,11 +20,20 @@
 #ifndef AUTHLDAPDIALOG_H
 #define AUTHLDAPDIALOG_H
 
+// Local includes:
+#include "ui_authldapdialog.h"
+
+// Qt Includes:
 #include <QDialog>
 
 
 class authLDAPDialog : public QDialog
 {
+  public:
+    authLDAPDialog(QWidget* parent = 0, Qt::WindowFlags f = 0);
+
+  private:
+    Ui::authLDAPDialogUI ui;
 };
 
 #endif // AUTHLDAPDIALOG_H

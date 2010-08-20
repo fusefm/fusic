@@ -19,3 +19,7 @@
 
 #include "authldapdialog.h"
 
+authLDAPDialog::authLDAPDialog(QWidget* parent, Qt::WindowFlags f): QDialog(parent, f)
+{
+  ui.setupUi(this);
+}
