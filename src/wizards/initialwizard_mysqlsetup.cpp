@@ -52,9 +52,9 @@ initialwizard_mysqlSetup::initialwizard_mysqlSetup(QWidget* parent): QWizardPage
   serverFormLayout->addRow("&Hostname:", editHost);
   serverFormLayout->addRow("&Port:", editPort);
   
-  registerField("*db_username", editUsername);
+  registerField("db_username*", editUsername);
   registerField("db_password", editPassword);
-  registerField("*db_host", editHost);
+  registerField("db_host*", editHost);
   registerField("db_port", editPort);
   
   serverBox->setLayout(serverFormLayout);
@@ -63,7 +63,7 @@ initialwizard_mysqlSetup::initialwizard_mysqlSetup(QWidget* parent): QWizardPage
   QGroupBox * tableBox = new QGroupBox("Table Settings");
   
   editDatabase = new QLineEdit;
-  registerField("*db_database", editDatabase);
+  registerField("db_database*", editDatabase);
   QPushButton* dbBrowse = new QPushButton("...");
   QHBoxLayout* browseLayout = new QHBoxLayout;
   browseLayout->addWidget(editDatabase);
