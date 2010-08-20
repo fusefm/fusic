@@ -3,7 +3,7 @@ find_package(Qt4 REQUIRED)
 find_package(OpenLDAP)
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${fusic_SOURCE_DIR}/src/auth)
 
-set(auth_SRCS authbase.cpp authsql.cpp authfactory.cpp)
+set(auth_SRCS authldapdialog.cpp authbase.cpp authsql.cpp authfactory.cpp)
 set(auth_LINK_LIBRARY ${QT_QTSQL_LIBRARY} ${QT_QTCORE_LIBRARY})
 
 IF(OpenLDAP_FOUND)
