@@ -26,6 +26,13 @@
 void authLDAP::doAuth()
 {
   LDAP* handle;
+
+  // Attempt to get LDAP settings.
+  if(!getLdapSettings())
+  {
+    emit authError("Please configure the LDAP authentication module.");
+    return;
+  }
   
   // Attempt connect.
   int res = ldap_initialize(&handle, mLDAPURI.toLatin1().data());
