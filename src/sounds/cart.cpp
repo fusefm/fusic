@@ -66,3 +66,30 @@ bool cart::extraSetup(QSqlDatabase& db, int soundID)
   // Finished setup.
   return true;
 }
+
+QSet<cart*> cart::getCartsForShowID(int showID)
+{
+  // Construct a new set.
+  QSet<cart*> cartSet;
+  // Connect to the database.
+  QSqlDatabase db = QSqlDatabase::database();
+  if(!db.open())
+    return cartSet;
+  
+  // Get cart File IDs for the show.
+  QSqlQuery query("SELECT File_ID from tbl_carts WHERE Show_ID = ?");
+  query.bindValue(0, showID);
+  query.exec();
+  
+  int fIDFileID = query.record().indexOf("File_ID");
+  
+  while(query.next())
+  {
+    cart* newCart = new cart;
+    newCart->setFileID(query.value(fIDFileID).toInt());
+    cartSet.insert(newCart);
+  }
+  
+  // Return the result.
+  return cartSet;
+}

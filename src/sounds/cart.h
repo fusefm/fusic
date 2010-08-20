@@ -6,6 +6,7 @@
 
 // Qt Includes:
 #include <QColor>
+#include <QSet>
 
 /**
  * @short A struct for representing the posistion of a cart.
@@ -62,6 +63,13 @@ class cart : public sound
      * @returns a QColor set to the color of the cart.
      */
     const QColor getColor();
+    
+    /**
+     * Return all carts for a given show.
+     * @param showID The ID number of the show.
+     * @returns A QSet of cart class pointers.
+     */
+    static QSet<cart*> getCartsForShowID(int showID);
   
   private:
     virtual bool extraSetup(QSqlDatabase& db, int soundID);
