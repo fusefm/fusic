@@ -8,6 +8,8 @@ set(auth_SRCS authldapdialog.cpp
               authsql.cpp
               authfactory.cpp)
 
+set(auth_GUI_SRCS authldapdialog.ui)
+
 set(auth_LINK_LIBRARY ${QT_QTSQL_LIBRARY} ${QT_QTCORE_LIBRARY})
 
 IF(OpenLDAP_FOUND)
@@ -16,6 +18,7 @@ IF(OpenLDAP_FOUND)
   set(auth_LINK_LIBRARY ${auth_LINK_LIBRARY} ${OpenLDAP_LIBRARY})
 ENDIF(OpenLDAP_FOUND)
 
+qt4_wrap_ui(auth_GUI_SRCS_H ${auth_GUI_SRCS})
 qt4_automoc(${auth_SRCS})
-add_library(fusic_auth SHARED ${auth_SRCS})
+add_library(fusic_auth SHARED ${auth_SRCS} ${auth_GUI_SRCS_H})
 target_link_libraries(fusic_auth ${auth_LINK_LIBRARY})
