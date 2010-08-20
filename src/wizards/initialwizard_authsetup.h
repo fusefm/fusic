@@ -90,7 +90,7 @@ class initialwizard_authsetup : public QWizardPage
     virtual bool isComplete() const;
 
   private:
-    Ui_WizardPage ui;
+    Ui::authWizardPage ui;
 };
 
 #endif // INITIALWIZARD_AUTHSETUP_H
