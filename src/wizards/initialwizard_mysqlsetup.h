@@ -43,6 +43,7 @@ class initialwizard_mysqlSetup : public QWizardPage
   Q_OBJECT
   public:
     initialwizard_mysqlSetup(QWidget* parent = 0);
+    virtual void initializePage();
 
   private slots:
     void showDBBrowser(bool checked);

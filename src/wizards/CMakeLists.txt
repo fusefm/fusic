@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 2.6)
 find_package(Qt4 REQUIRED)
 include_directories(${QT_INCLUDES}
                     ${CMAKE_CURRENT_BINARY_DIR}
-                    ${fusic_SOURCE_DIR}/src/auth/)
+                    ${fusic_SOURCE_DIR}/src/auth/
+                    ${fusic_SOURCE_DIR}/src/misc/)
 
 set(wizard_GUI_SRCS initialwizard_authsetup.ui)
 

@@ -19,6 +19,7 @@
 
 #include "initialwizard_mysqlsetup.h"
 #include "databasechooser.h"
+#include "fusicsettings.h"
 
 // Qt Includes:
 #include <QGroupBox>
@@ -98,6 +99,14 @@ void initialwizard_mysqlSetup::showDBBrowser(bool checked)
   }
 }
 
+void initialwizard_mysqlSetup::initializePage()
+{
+  // Set default values.
+  editUsername->setText(fusicSettings::DBSettings::getUserName());
+  editPassword->setText(fusicSettings::DBSettings::getPassword());
+  editHost->setText(fusicSettings::DBSettings::getHost());
+  editPort->setText(QString(fusicSettings::DBSettings::getPort()));
+}
 
 
 #include "initialwizard_mysqlsetup.moc"
