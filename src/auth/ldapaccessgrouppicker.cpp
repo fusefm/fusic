@@ -18,4 +18,65 @@
 */
 
 #include "ldapaccessgrouppicker.h"
+#include <QMessageBox>
+#include <QSettings>
 
+LDAPAccessGroupPicker::LDAPAccessGroupPicker(QWidget* parent, Qt::WindowFlags f): QDialog(parent, f)
+{
+  // Setup the UI.
+  ui.setupUi(this);
+
+  // Make connections.
+  connect(ui.addButton, SIGNAL(pressed()), this, SLOT(addAccessGroupPress()));
+  
+}
+
+void LDAPAccessGroupPicker::addAccessGroupPress()
+{
+  // Ensure that there is some text.
+  if(!ui.groupNameEdit->text().isEmpty())
+  {
+    // Add the text to the list.
+    QListWidgetItem* item = new QListWidgetItem(
+      ui.groupNameEdit->text(), ui.groupNameList);
+  }
+}
+
+void LDAPAccessGroupPicker::removeAccessGroupPress()
+{
+  // Ensure that there is a selection.
+  if(!ui.groupNameList->selectedItems().isEmpty())
+  {
+    // Remove item from the list.
+    ui.groupNameList->removeItemWidget(
+      ui.groupNameList->selectedItems().first());
+  }
+}
+
+void LDAPAccessGroupPicker::okButtonGroupBoxPress(QAbstractButton* btn)
+{
+  if(ui.okButtonBox->buttonRole(btn) == QDialogButtonBox::AcceptRole)
+  {
+    // Ensure that there is at least one item.
+    if(ui.groupNameList->count() == 0)
+    {
+      QMessageBox::critical(this, "Error", "Please select at least one access group.");
+      return;
+    }
+    else
+    {
+      QStringList accessGroups;
+      QSettings set;
+      for(int i = 0; i < ui.groupNameList->count(); i++)
+      {
+        accessGroups.append(ui.groupNameList->item(i)->text());
+      }
+
+      // Save the selection.
+      set.setValue("LDAPSettings/AccessGroups", accessGroups);
+
+      // Exit the dialog.
+      accept();
+    }
+  }
+}
