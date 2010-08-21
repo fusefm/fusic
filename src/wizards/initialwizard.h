@@ -36,6 +36,9 @@ class InitialWizard : public QWizard
 {
   public:
     InitialWizard(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+
+  private:
+    virtual void accept();
 };
 
 #endif // INITIALWIZARD_H
