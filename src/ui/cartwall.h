@@ -3,7 +3,10 @@
 
 #include <qt4/QtGui/QMainWindow>
 
-#include "ui_cartwall.h"
+namespace Ui
+{
+  class CartWall;
+}
 
 class CartWall : public QMainWindow
 {
@@ -13,7 +16,7 @@ class CartWall : public QMainWindow
     CartWall(QWidget* parent = 0, Qt::WindowFlags flags = 0);
     
   private:
-    Ui::CartWall ui;
+    Ui::CartWall* ui;
 };
 
 #endif // CARTWALL_H
