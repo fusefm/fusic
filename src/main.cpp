@@ -1,21 +1,29 @@
 #include <QtGui/QApplication>
-#include "fusic.h"
 #include "wizards/initialwizard.h"
-#include "wizards/initialwizard_introduction.h"
 #include "misc/fusicsettings.h"
+#include "ui/cartwall.h"
+#include <QSettings>
 
 int main(int argc, char** argv)
 {
-    QApplication app(argc, argv);
-    if (!fusicSettings::misc::hasCompletedInitalSetup())
-    {
-        InitialWizard* wiz = new InitialWizard();
-        wiz->show();
-    }
-    else
-    {
-        Fusic* foo = new Fusic;
-        foo->show();
-    }
-    return app.exec();
+  QApplication app(argc, argv);
+
+  // Sett app and company names for settings.
+  QCoreApplication::setOrganizationName("FuseFM");
+  QCoreApplication::setOrganizationDomain("fusefm.co.uk");
+  QCoreApplication::setApplicationName("Fusic");
+  
+  if (!fusicSettings::misc::hasCompletedInitalSetup())
+  {
+    // Show the wizard.
+    InitialWizard* wiz = new InitialWizard();
+    wiz->show();
+  }
+  else
+  {
+    // Show the carts dialog.
+    CartWall* theWall = new CartWall;
+    theWall->show();
+  }
+  return app.exec();
 }

@@ -14,4 +14,10 @@ set(fusic_RCS res.qrc)
 qt4_automoc(${fusic_SRCS})
 qt4_add_resources( fusic_compiled_RCS ${fusic_RCS})
 add_executable(fusic ${fusic_SRCS} ${fusic_compiled_RCS})
-target_link_libraries(fusic ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} fusic_wizard fusic_misc fusic_auth)
+target_link_libraries(fusic
+                      ${QT_QTCORE_LIBRARY}
+                      ${QT_QTGUI_LIBRARY}
+                      fusic_wizard
+                      fusic_misc
+                      fusic_auth
+                      fusic_ui)
