@@ -21,7 +21,7 @@
 #include <QSettings>
 #include <QMessageBox>
 
-authLDAPDialog::authLDAPDialog(QWidget* parent, Qt::WindowFlags f): QDialog(parent, f)
+AuthLDAPDialog::AuthLDAPDialog(QWidget* parent, Qt::WindowFlags f): QDialog(parent, f)
 {
   ui.setupUi(this);
 
@@ -29,7 +29,7 @@ authLDAPDialog::authLDAPDialog(QWidget* parent, Qt::WindowFlags f): QDialog(pare
           this, SLOT(okOrCancelButtonPress(QAbstractButton*)));
 }
 
-void authLDAPDialog::okOrCancelButtonPress(QAbstractButton* button)
+void AuthLDAPDialog::okOrCancelButtonPress(QAbstractButton* button)
 {
   // Check if it's the Ok button:
   if(ui.okCancelButtonBox->buttonRole(button) == QDialogButtonBox::AcceptRole)
@@ -59,7 +59,7 @@ void authLDAPDialog::okOrCancelButtonPress(QAbstractButton* button)
   }
 }
 
-bool authLDAPDialog::validate()
+bool AuthLDAPDialog::validate()
 {
   QSettings set;
   if(ui.hostnameEdit->text().isEmpty())

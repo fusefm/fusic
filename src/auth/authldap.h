@@ -22,7 +22,7 @@
 
 #include <authbase.h>
 
-class authLDAP : public authBase
+class AuthLDAP : public AuthBase
 {
 
 public:

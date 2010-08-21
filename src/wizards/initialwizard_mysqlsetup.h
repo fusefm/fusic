@@ -41,11 +41,11 @@
  *
  * @author Matthew Leach <matt@fusefm.co.uk>
  */
-class initialwizard_mysqlSetup : public QWizardPage
+class InitialWizardMySQLSetup : public QWizardPage
 {
   Q_OBJECT
   public:
-    initialwizard_mysqlSetup(QWidget* parent = 0);
+    InitialWizardMySQLSetup(QWidget* parent = 0);
     virtual void initializePage();
 
   private slots:

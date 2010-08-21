@@ -5,7 +5,7 @@
 #include <QtGui/QMenuBar>
 #include <QtGui/QAction>
 
-fusic::fusic()
+Fusic::Fusic()
 {
     QLabel* l = new QLabel( this );
     l->setText( "Hello World!" );
@@ -16,7 +16,7 @@ fusic::fusic()
     menuBar()->addMenu( "File" )->addAction( a );
 }
 
-fusic::~fusic()
+Fusic::~Fusic()
 {}
 
 #include "fusic.moc"

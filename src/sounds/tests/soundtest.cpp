@@ -19,7 +19,7 @@
 
 #include "soundtest.h"
 #include <fusicsettings.h>
-#include <sound.h>
+#include <song.h>
 #include <QTest>
 #include <QDebug>
 #include <QSignalSpy>
@@ -48,7 +48,7 @@ void soundTest::testSoundSetup()
   initSettings();
   
   // Create the object.
-  sound theSound(1);
+  Song theSound(1);
   
   // Ensure a valid object.
   QVERIFY(theSound.isValid());
@@ -62,7 +62,7 @@ void soundTest::testSoundSetup()
 void soundTest::testSoundAsyncSetup()
 {
   
-  sound theSound;
+  Sound theSound;
   
   QSignalSpy spy(&theSound, SIGNAL(setupComplete(bool)));
   theSound.setFileID(1);
@@ -83,8 +83,8 @@ void soundTest::testSoundInvalidation()
  db.close();
  db.setHostName("foo");
  
-  sound theSound;
-  sound anotherSound(1);
+  Sound theSound;
+  Sound anotherSound(1);
   // Ensure the object is not valid.
   QVERIFY(!theSound.isValid());
   

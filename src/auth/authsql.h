@@ -22,10 +22,10 @@
 
 #include "authbase.h"
 
-class authSQL : public authBase
+class AuthSQL : public AuthBase
 {
 public:
-  authSQL();
+  AuthSQL();
   virtual void doAuth();
   virtual QString getName();
   virtual const QString getAuthor();

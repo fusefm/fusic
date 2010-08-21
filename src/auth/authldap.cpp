@@ -23,7 +23,7 @@
 #include <ldap.h>
 #include <QSettings>
 
-void authLDAP::doAuth()
+void AuthLDAP::doAuth()
 {
   LDAP* handle;
 
@@ -162,32 +162,32 @@ void authLDAP::doAuth()
     emit finishedAuth(false);
 }
 
-QString authLDAP::getName()
+QString AuthLDAP::getName()
 {
     return "LDAP Authentication";
 }
 
-const QString authLDAP::getAuthor()
+const QString AuthLDAP::getAuthor()
 {
   return "Matthew Leach";
 }
 
-const QString authLDAP::getDescription()
+const QString AuthLDAP::getDescription()
 {
   return "Authenticate against an openLDAP server.";
 }
 
-QDialog* authLDAP::getsettingsDialog(QWidget* parent)
+QDialog* AuthLDAP::getsettingsDialog(QWidget* parent)
 {
-  return new authLDAPDialog(parent);
+  return new AuthLDAPDialog(parent);
 }
 
-const QString authLDAP::getLDAPErrorString(int errnumber)
+const QString AuthLDAP::getLDAPErrorString(int errnumber)
 {
   return QString(ldap_err2string(errnumber));
 }
 
-bool authLDAP::getLdapSettings()
+bool AuthLDAP::getLdapSettings()
 {
   QSettings set;
   int timeout;

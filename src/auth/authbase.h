@@ -43,12 +43,12 @@
  *
  * @author Matthew Leach <matt@fusefm.co.uk>
  */
-class authBase : public QThread
+class AuthBase : public QThread
 {
   Q_OBJECT
 public:
   // Constructor.
-  authBase(QObject* parent = 0);
+  AuthBase(QObject* parent = 0);
   
   /**
    * Authentication modules should put the code here that actually does
@@ -140,6 +140,6 @@ protected:
   QString mPassword;
 };
 
-Q_DECLARE_METATYPE(authBase*)
+Q_DECLARE_METATYPE(AuthBase*)
 
 #endif // AUTHBASE_H

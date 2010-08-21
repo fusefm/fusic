@@ -19,27 +19,27 @@
 
 #include "authbase.h"
 
-authBase::authBase(QObject* parent): QThread(parent)
+AuthBase::AuthBase(QObject* parent): QThread(parent)
 {
 }
 
-void authBase::run()
+void AuthBase::run()
 {
   doAuth();
 }
 
-void authBase::setCredentials(const QString& userID, const QString& password)
+void AuthBase::setCredentials(const QString& userID, const QString& password)
 {
     mPassword = password;
     mUserID = userID;
 }
 
-void authBase::doAuth()
+void AuthBase::doAuth()
 {
   emit authError("authBase should not be used for authentication.");
 }
 
-QDialog* authBase::getsettingsDialog(QWidget* parent)
+QDialog* AuthBase::getsettingsDialog(QWidget* parent)
 {
   return NULL;
 }

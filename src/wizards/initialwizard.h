@@ -32,10 +32,10 @@
  *
  * @author Matthew Leach <matthew@fusefm.co.uk>
  */
-class initialWizard : public QWizard
+class InitialWizard : public QWizard
 {
   public:
-    initialWizard(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    InitialWizard(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 };
 
 #endif // INITIALWIZARD_H

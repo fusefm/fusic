@@ -20,15 +20,15 @@
 #include "authldap.h"
 #include "authsql.h"
 
-QList<authBase*> authFactory::getAuthModules()
+QList<AuthBase*> AuthFactory::getAuthModules()
 {
   // Create the auth modules if they are defined.
-  QList<authBase*> moduleList;
+  QList<AuthBase*> moduleList;
   #ifdef LDAP_AUTH
-    authLDAP* modLDAP = new authLDAP;
+    AuthLDAP* modLDAP = new AuthLDAP;
     moduleList.append(modLDAP);
   #endif
-  authSQL* modSQL = new authSQL;
+  AuthSQL* modSQL = new AuthSQL;
   moduleList.append(modSQL);
 
   return moduleList;

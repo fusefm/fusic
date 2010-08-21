@@ -21,7 +21,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
-initialwizard_introduction::initialwizard_introduction(QWidget* parent): QWizardPage(parent)
+InitialWizardIntroduction::InitialWizardIntroduction(QWidget* parent): QWizardPage(parent)
 {
   setTitle("Fusic Introduction");
   

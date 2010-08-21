@@ -27,11 +27,11 @@
 #include <QVariant>
 #include <QSettings>
 
-authSQL::authSQL()
+AuthSQL::AuthSQL()
 {
 }
 
-void authSQL::doAuth()
+void AuthSQL::doAuth()
 {
   // Create a new database object and connect.
   QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
@@ -66,52 +66,52 @@ void authSQL::doAuth()
     emit finishedAuth(true);
 }
 
-QString authSQL::getName()
+QString AuthSQL::getName()
 {
     return "MySQL Authentication";
 }
 
-const QString authSQL::getAuthor()
+const QString AuthSQL::getAuthor()
 {
   return "Matthew Leach";
 }
 
-const QString authSQL::getDescription()
+const QString AuthSQL::getDescription()
 {
   return "Authenticates a MySQL server with a username and MD5"
     " password field.";
 }
 
-QDialog* authSQL::getsettingsDialog(QWidget* parent)
+QDialog* AuthSQL::getsettingsDialog(QWidget* parent)
 {
   return new QDialog;
 }
 
-QString authSQL::getUserName()
+QString AuthSQL::getUserName()
 {
   QSettings set;
   return set.value("SQLAuth/UserName").toString();
 }
 
-QString authSQL::getDatabaseName()
+QString AuthSQL::getDatabaseName()
 {
   QSettings set;
   return set.value("SQLAuth/DatabaseName").toString();
 }
 
-QString authSQL::getHostName()
+QString AuthSQL::getHostName()
 {
   QSettings set;
   return set.value("SQLAuth/HostName").toString();
 }
 
-QString authSQL::getTableName()
+QString AuthSQL::getTableName()
 {
   QSettings set;
   return set.value("SQLAuth/Table").toString();
 }
 
-QString authSQL::getPassword()
+QString AuthSQL::getPassword()
 {
   QSettings set;
   return set.value("SQLAuth/Password").toString();

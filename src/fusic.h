@@ -3,12 +3,12 @@
 
 #include <QtGui/QMainWindow>
 
-class fusic : public QMainWindow
+class Fusic : public QMainWindow
 {
 Q_OBJECT
 public:
-    fusic();
-    virtual ~fusic();
+    Fusic();
+    virtual ~Fusic();
 };
 
 #endif // fusic_H

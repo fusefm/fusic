@@ -23,12 +23,12 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 
-initialwizard_authsetup::initialwizard_authsetup(QWidget* parent): QWizardPage(parent)
+InitialWizardAuthSetup::InitialWizardAuthSetup(QWidget* parent): QWizardPage(parent)
 {
   ui.setupUi(this);
 
   // Setup the auth module list.
-  foreach(authBase* authMod, authFactory::getAuthModules())
+  foreach(AuthBase* authMod, AuthFactory::getAuthModules())
   {
     QListWidgetItem* item =  new QListWidgetItem(authMod->getName(), ui.authModulesList);
     item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
@@ -49,10 +49,10 @@ initialwizard_authsetup::initialwizard_authsetup(QWidget* parent): QWizardPage(p
           this, SLOT(configureButtonPress()));
 }
 
-void initialwizard_authsetup::itemChanged(QListWidgetItem* item)
+void InitialWizardAuthSetup::itemChanged(QListWidgetItem* item)
 {
   // Get the auth module.
-  authBase* authModule = item->data(Qt::UserRole).value<authBase*>();
+  AuthBase* authModule = item->data(Qt::UserRole).value<AuthBase*>();
 
   // Set the description.
   ui.descriptionLabel->setText(authModule->getDescription());
@@ -67,7 +67,7 @@ void initialwizard_authsetup::itemChanged(QListWidgetItem* item)
     ui.configureButton->setEnabled(false);
 }
 
-void initialwizard_authsetup::checkChanged(QListWidgetItem* item)
+void InitialWizardAuthSetup::checkChanged(QListWidgetItem* item)
 {
   if(item->data(Qt::CheckStateRole) == Qt::Checked)
     ui.configureButton->setEnabled(true);
@@ -75,18 +75,18 @@ void initialwizard_authsetup::checkChanged(QListWidgetItem* item)
     ui.configureButton->setEnabled(false);
 }
 
-void initialwizard_authsetup::configureButtonPress()
+void InitialWizardAuthSetup::configureButtonPress()
 {
   // Get the auth module.
-  authBase* authModule = ui.authModulesList->selectedItems().first()->
-    data(Qt::UserRole).value<authBase*>();
+  AuthBase* authModule = ui.authModulesList->selectedItems().first()->
+    data(Qt::UserRole).value<AuthBase*>();
 
   // Show the dialog.
   QDialog* authDialog = authModule->getsettingsDialog(this);
   authDialog->show();
 }
 
-bool initialwizard_authsetup::isComplete() const
+bool InitialWizardAuthSetup::isComplete() const
 {
   // Get all items.
   for(int i = 0; i < ui.authModulesList->count(); i++)

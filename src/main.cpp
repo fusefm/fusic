@@ -9,12 +9,12 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
     if (!fusicSettings::misc::hasCompletedInitalSetup())
     {
-        initialWizard* wiz = new initialWizard();
+        InitialWizard* wiz = new InitialWizard();
         wiz->show();
     }
     else
     {
-        fusic* foo = new fusic;
+        Fusic* foo = new Fusic;
         foo->show();
     }
     return app.exec();

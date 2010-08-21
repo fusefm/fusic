@@ -30,10 +30,10 @@
  *
  * @author Matthew Leach <matthew@fusefm.co.uk>
  */
-class initialwizard_introduction : public QWizardPage
+class InitialWizardIntroduction : public QWizardPage
 {
   public:
-    initialwizard_introduction(QWidget* parent = 0);
+    InitialWizardIntroduction(QWidget* parent = 0);
 };
 
 #endif // INITIALWIZARD_INTRODUCTION_H

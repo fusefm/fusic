@@ -34,7 +34,7 @@
  *
  * @author Matthew Leach <matt@fusefm.co.uk>
  */
-struct posistion
+struct CartPosistion
 {
   /**
    * The page number for the cart.
@@ -62,14 +62,14 @@ struct posistion
  *
  * @author Matthew Leach <matt@fusefm.co.uk>
  */
-class cart : public sound
+class Cart : public Sound
 {
   public:
     /**
      * Get the posistion of the cart.
      * @returns a posistion struct set to the relevant posistion.
      */
-    const struct posistion getPosistion();
+    const struct CartPosistion getPosistion();
     
     /**
      * Get the carts text to display on the cart button.
@@ -88,11 +88,11 @@ class cart : public sound
      * @param showID The ID number of the show.
      * @returns A QSet of cart class pointers.
      */
-    static QSet<cart*> getCartsForShowID(int showID);
+    static QSet<Cart*> getCartsForShowID(int showID);
   
   private:
     virtual bool extraSetup(QSqlDatabase& db, int soundID);
-    struct posistion cartPosistion;
+    struct CartPosistion cartPosistion;
     QString cartText;
     QColor color;
 };

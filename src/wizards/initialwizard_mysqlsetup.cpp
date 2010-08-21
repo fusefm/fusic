@@ -31,7 +31,7 @@
 #include <QFormLayout>
 #include <QMessageBox>
 
-initialwizard_mysqlSetup::initialwizard_mysqlSetup(QWidget* parent): QWizardPage(parent)
+InitialWizardMySQLSetup::InitialWizardMySQLSetup(QWidget* parent): QWizardPage(parent)
 {
   ui.setupUi(this);
 
@@ -50,7 +50,7 @@ initialwizard_mysqlSetup::initialwizard_mysqlSetup(QWidget* parent): QWizardPage
 
 }
 
-void initialwizard_mysqlSetup::showDBBrowser(bool checked)
+void InitialWizardMySQLSetup::showDBBrowser(bool checked)
 {
   if(ui.hostnameEdit->text().isEmpty() || ui.usernameEdit->text().isEmpty())
   {
@@ -68,7 +68,7 @@ void initialwizard_mysqlSetup::showDBBrowser(bool checked)
   }
 }
 
-void initialwizard_mysqlSetup::initializePage()
+void InitialWizardMySQLSetup::initializePage()
 {
   // Set default values.
   ui.usernameEdit->setText(fusicSettings::DBSettings::getUserName());

@@ -38,7 +38,7 @@
  *
  * @author Matthew Leach <matt@fusefm.co.uk>
  */
-class initialwizard_authsetup : public QWizardPage
+class InitialWizardAuthSetup : public QWizardPage
 {
   Q_OBJECT
   public:
@@ -49,7 +49,7 @@ class initialwizard_authsetup : public QWizardPage
      *
      * @param parent The parent dialog.
      */
-    initialwizard_authsetup(QWidget* parent = 0);
+    InitialWizardAuthSetup(QWidget* parent = 0);
 
   private slots:
 

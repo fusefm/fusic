@@ -26,10 +26,10 @@
 //Qt Includes:
 #include <QList>
 
-class authFactory
+class AuthFactory
 {
   public:
-    static QList<authBase*> getAuthModules();
+    static QList<AuthBase*> getAuthModules();
 };
 
 #endif // AUTHFACTORY_H

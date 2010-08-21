@@ -28,7 +28,7 @@
  * This class extends the sound object to include properties that are
  * specific to songs.
  */
-class song : public sound
+class Song : public Sound
 {
   // Public getter functions.
 public:

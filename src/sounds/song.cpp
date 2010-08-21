@@ -27,28 +27,28 @@
 
 // Public getter implimentation.
 
-QString song::getAlbum()
+QString Song::getAlbum()
 {
     mutex.lock();
     mutex.unlock();
     return album;
 }
 
-QString song::getArtist()
+QString Song::getArtist()
 {
     mutex.lock();
     mutex.unlock();
     return artist;
 }
 
-double song::getIntro()
+double Song::getIntro()
 {
     mutex.lock();
     mutex.unlock();
     return intro;
 }
 
-QString song::getGenre()
+QString Song::getGenre()
 {
     mutex.lock();
     mutex.unlock();
@@ -56,7 +56,7 @@ QString song::getGenre()
 }
 
 // Do extra setup for extended properties.
-bool song::extraSetup(QSqlDatabase &db, int soundID)
+bool Song::extraSetup(QSqlDatabase &db, int soundID)
 {
     // Ensure we have an active database connection.
     if(!db.isOpen())

@@ -58,7 +58,7 @@
  * @author Matthew Leach <matt@fusefm.co.uk>
  *
  */
-class sound : public QObject
+class Sound : public QObject
 {
   Q_OBJECT
   
@@ -67,14 +67,14 @@ class sound : public QObject
   /**
    * Construct an empty sound object.
    */
-  sound();
+  Sound();
 
   /**
    * Construct a sound object for the given fileID.
    * @note Calling this method will block until database lookups have finished.
    * @param fileID The file ID for the object to represent.
    */
-  sound(int fileID);
+  Sound(int fileID);
 
   // Public getter functions.
   /**
@@ -167,11 +167,11 @@ private:
   class threadedSetup : public QThread
   {
     public:
-      threadedSetup(sound* s, int fileID);
+      threadedSetup(Sound* s, int fileID);
       virtual void run();
 
     private:
-      sound* m_Sound;
+      Sound* m_Sound;
       int m_fileID;      
   };
   

@@ -22,28 +22,28 @@
 #include <QSqlRecord>
 #include <QVariant>
 
-const QString cart::getCartText()
+const QString Cart::getCartText()
 {
   mutex.lock();
   mutex.unlock();
   return cartText;
 }
 
-const QColor cart::getColor()
+const QColor Cart::getColor()
 {
   mutex.lock();
   mutex.unlock();
   return color;
 }
 
-const posistion cart::getPosistion()
+const CartPosistion Cart::getPosistion()
 {
   mutex.lock();
   mutex.unlock();
   return cartPosistion;
 }
 
-bool cart::extraSetup(QSqlDatabase& db, int soundID)
+bool Cart::extraSetup(QSqlDatabase& db, int soundID)
 {
   // Ensure we have an active database connection.
   if(!db.isOpen())
@@ -86,10 +86,10 @@ bool cart::extraSetup(QSqlDatabase& db, int soundID)
   return true;
 }
 
-QSet<cart*> cart::getCartsForShowID(int showID)
+QSet<Cart*> Cart::getCartsForShowID(int showID)
 {
   // Construct a new set.
-  QSet<cart*> cartSet;
+  QSet<Cart*> cartSet;
   // Connect to the database.
   QSqlDatabase db = QSqlDatabase::database();
   if(!db.open())
@@ -104,7 +104,7 @@ QSet<cart*> cart::getCartsForShowID(int showID)
   
   while(query.next())
   {
-    cart* newCart = new cart;
+    Cart* newCart = new Cart;
     newCart->setFileID(query.value(fIDFileID).toInt());
     cartSet.insert(newCart);
   }

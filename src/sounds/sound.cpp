@@ -31,7 +31,7 @@
 // For documentation, see sound.h
 
 // Constructor implimentation.
-sound::sound() : 
+Sound::Sound() : 
   title(QString()),
   location(QString()),
   duration(0),
@@ -40,13 +40,13 @@ sound::sound() :
   
 }
 
-sound::sound(int fileID)
+Sound::Sound(int fileID)
 {
   doSetup(fileID);
 }
 
 // public getter implimentation.
-QString sound::getTitle()
+QString Sound::getTitle()
 {
   // Attempt to lock and unlock the mutex to ensure that a threaded stup has finished.
   mutex.lock();
@@ -54,7 +54,7 @@ QString sound::getTitle()
   return title;
 }
 
-QString sound::getLocation()
+QString Sound::getLocation()
 {
   // Attempt to lock and unlock the mutex to ensure that a threaded stup has finished.
   mutex.lock();
@@ -62,7 +62,7 @@ QString sound::getLocation()
   return location;
 }
 
-double sound::getDuration()
+double Sound::getDuration()
 {
   // Attempt to lock and unlock the mutex to ensure that a threaded stup has finished.
   mutex.lock();
@@ -70,7 +70,7 @@ double sound::getDuration()
   return duration;
 }
 
-bool sound::isValid()
+bool Sound::isValid()
 {
   // Attempt to lock and unlock the mutex to ensure that a threaded stup has finished.
   mutex.lock();
@@ -80,20 +80,20 @@ bool sound::isValid()
 
 // Protected member implimentation.
 
-void sound::invalidate()
+void Sound::invalidate()
 {
   valid = false;
 }
 
 // Private member implimentation.
 
-sound::threadedSetup::threadedSetup(sound* s, int fileID)
+Sound::threadedSetup::threadedSetup(Sound* s, int fileID)
 {
   m_Sound = s;
   m_fileID = fileID;
 }
 
-void sound::threadedSetup::run()
+void Sound::threadedSetup::run()
 {
     bool res = m_Sound->doSetup(m_fileID);
     
@@ -101,13 +101,13 @@ void sound::threadedSetup::run()
     emit m_Sound->setupComplete(res);
 }
 
-void sound::setFileID(int fileID)
+void Sound::setFileID(int fileID)
 {
   threadedSetup tSetup(this, fileID);
   tSetup.run();
 }
 
-bool sound::doSetup(int fileID)
+bool Sound::doSetup(int fileID)
 {
   // Lock the mutex until setup is complete.
   QMutexLocker locker(&mutex);

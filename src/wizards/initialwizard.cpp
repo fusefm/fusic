@@ -22,9 +22,9 @@
 #include "initialwizard_mysqlsetup.h"
 #include "initialwizard_authsetup.h"
 
-initialWizard::initialWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(parent, flags)
+InitialWizard::InitialWizard(QWidget* parent, Qt::WindowFlags flags): QWizard(parent, flags)
 {
-  addPage(new initialwizard_introduction);
-  addPage(new initialwizard_mysqlSetup);
-  addPage(new initialwizard_authsetup);
+  addPage(new InitialWizardIntroduction);
+  addPage(new InitialWizardMySQLSetup);
+  addPage(new InitialWizardAuthSetup);
 }

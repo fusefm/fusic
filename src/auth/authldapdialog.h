@@ -27,11 +27,11 @@
 #include <QDialog>
 
 
-class authLDAPDialog : public QDialog
+class AuthLDAPDialog : public QDialog
 {
   Q_OBJECT
   public:
-    authLDAPDialog(QWidget* parent = 0, Qt::WindowFlags f = 0);
+    AuthLDAPDialog(QWidget* parent = 0, Qt::WindowFlags f = 0);
 
   private slots:
     void okOrCancelButtonPress(QAbstractButton* button);
