@@ -1,1 +1,10 @@
+cmake_minimum_required(VERSION 2.6)
+find_package(Qt4 REQUIRED)
+include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
+set(ui_SRCS cartbutton.cpp cartwall.cpp)
+set(ui_GUI_SRCS cartwall.ui)
+qt4_wrap_ui(ui_GUI_SRCS_H ${ui_GUI_SRCS})
+qt4_automoc(${ui_SRCS})
+add_library(fusic_ui SHARED ${ui_SRCS} ${ui_GUI_SRCS_H})
+target_link_libraries(fusic_ui ${QT_QTCORE_LIBRARY} ${QT_QTSQL_LIBRARY})
