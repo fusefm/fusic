@@ -8,7 +8,7 @@ set(auth_SRCS ldapaccessgrouppicker.cpp authldapdialog.cpp
               authsql.cpp
               authfactory.cpp)
 
-set(auth_GUI_SRCS authldapdialog.ui)
+set(auth_GUI_SRCS ldapaccessgrouppicker.ui authldapdialog.ui)
 
 set(auth_LINK_LIBRARY ${QT_QTSQL_LIBRARY} ${QT_QTCORE_LIBRARY})
 
