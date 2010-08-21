@@ -9,7 +9,7 @@ add_subdirectory(wizards)
 
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
-set(fusic_SRCS fusic.cpp main.cpp)
+set(fusic_SRCS main.cpp)
 set(fusic_RCS res.qrc)
 qt4_automoc(${fusic_SRCS})
 qt4_add_resources( fusic_compiled_RCS ${fusic_RCS})
