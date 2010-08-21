@@ -18,6 +18,7 @@
 */
 
 #include "authldapdialog.h"
+#include "ldapaccessgrouppicker.h"
 #include <QSettings>
 #include <QMessageBox>
 
@@ -27,6 +28,9 @@ AuthLDAPDialog::AuthLDAPDialog(QWidget* parent, Qt::WindowFlags f): QDialog(pare
 
   connect(ui.okCancelButtonBox, SIGNAL(clicked(QAbstractButton*)),
           this, SLOT(okOrCancelButtonPress(QAbstractButton*)));
+
+  connect(ui.accessGroupsButton, SIGNAL(pressed()), this,
+          SLOT(configureAccessgroupsPress()));
 }
 
 void AuthLDAPDialog::okOrCancelButtonPress(QAbstractButton* button)
@@ -88,5 +92,13 @@ bool AuthLDAPDialog::validate()
     return true;
   }
 }
+
+void AuthLDAPDialog::configureAccessgroupsPress()
+{
+  LDAPAccessGroupPicker* accessGroupDialog = new
+    LDAPAccessGroupPicker(this);
+    accessGroupDialog->show();
+}
+
 
 #include "authldapdialog.moc"

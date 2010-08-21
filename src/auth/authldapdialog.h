@@ -35,6 +35,7 @@ class AuthLDAPDialog : public QDialog
 
   private slots:
     void okOrCancelButtonPress(QAbstractButton* button);
+    void configureAccessgroupsPress();
 
   private:
     bool validate();
