@@ -20,11 +20,20 @@
 #ifndef LDAPACCESSGROUPPICKER_H
 #define LDAPACCESSGROUPPICKER_H
 
+// Local Includes:
+#include "ui_ldapaccessgrouppicker.h"
+
+// Qt Includes:
 #include <QDialog>
 
 
 class LDAPAccessGroupPicker : public QDialog
 {
+  public:
+    LDAPAccessGroupPicker(QWidget* parent = 0, Qt::WindowFlags f = 0);
+
+  private:
+    Ui::LDAPAccessGroupChooserUI ui;
 };
 
 #endif // LDAPACCESSGROUPPICKER_H
