@@ -23,12 +23,22 @@
 
 LDAPAccessGroupPicker::LDAPAccessGroupPicker(QWidget* parent, Qt::WindowFlags f): QDialog(parent, f)
 {
+  QSettings set;
   // Setup the UI.
   ui.setupUi(this);
 
   // Make connections.
   connect(ui.addButton, SIGNAL(pressed()), this, SLOT(addAccessGroupPress()));
-  
+  connect(ui.okButtonBox, SIGNAL(clicked(QAbstractButton*)),
+          this, SLOT(okButtonGroupBoxPress(QAbstractButton*)));
+
+  // Prepopulate with settings.
+  foreach(QString accessGroup,
+          set.value("LDAPSettings/AccessGroups").toStringList())
+  {
+    QListWidgetItem* item = new QListWidgetItem(accessGroup,
+                                                ui.groupNameList);
+  }
 }
 
 void LDAPAccessGroupPicker::addAccessGroupPress()
@@ -39,6 +49,10 @@ void LDAPAccessGroupPicker::addAccessGroupPress()
     // Add the text to the list.
     QListWidgetItem* item = new QListWidgetItem(
       ui.groupNameEdit->text(), ui.groupNameList);
+
+    // Also clear the lineedit widget and set focus.
+    ui.groupNameEdit->clear();
+    ui.groupNameEdit->setFocus();
   }
 }
 
@@ -80,3 +94,5 @@ void LDAPAccessGroupPicker::okButtonGroupBoxPress(QAbstractButton* btn)
     }
   }
 }
+
+#include "ldapaccessgrouppicker.moc"
