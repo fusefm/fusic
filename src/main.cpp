@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 {
   QApplication app(argc, argv);
 
-  // Sett app and company names for settings.
+  // Set app and company names for settings.
   QCoreApplication::setOrganizationName("FuseFM");
   QCoreApplication::setOrganizationDomain("fusefm.co.uk");
   QCoreApplication::setApplicationName("Fusic");
