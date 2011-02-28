@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 find_package(Qt4 REQUIRED)
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
-set(ui_SRCS cartbutton.cpp cartwall.cpp)
+set(ui_SRCS cartwall.cpp)
 set(ui_GUI_SRCS cartwall.ui)
 qt4_wrap_ui(ui_GUI_SRCS_H ${ui_GUI_SRCS})
 qt4_automoc(${ui_SRCS})
