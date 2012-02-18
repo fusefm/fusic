@@ -61,9 +61,9 @@ BOOL CFusicShowSelectionDlg::OnInitDialog()
 
 	//do the query for all shows for the given user ID:
 	CString strSQL;
-	strSQL = "SELECT * FROM tbl_show_users;";/* WHERE `User_ID` = '";
+	strSQL = "SELECT * FROM tbl_show_users WHERE `User_ID` = '";
 	strSQL += m_strUserID;
-	strSQL += "';";*/
+	strSQL += "';";
 
 	//do the query;
 	mysqlpp::Query query = conn.query(strSQL);
@@ -71,11 +71,14 @@ BOOL CFusicShowSelectionDlg::OnInitDialog()
 	//get the result:
 	mysqlpp::StoreQueryResult res = query.store();
 
-	//we are alywas going to have a Fuse Show:
-	showStruct fuseShow;
-	fuseShow.strShowID = "0";
-	fuseShow.strShowName = "Fuse FM (Default)";
-	m_vecShows.push_back(fuseShow);
+	//Only show the Fuse show if a person doesn't have another show.
+	if((int)res.size() == 0)
+	{
+		showStruct fuseShow;
+		fuseShow.strShowID = "0";
+		fuseShow.strShowName = "Fuse FM (Default)";
+		m_vecShows.push_back(fuseShow);
+	}
 
 	//loop through the results and store them:
 	for(size_t i = 0; i < res.num_rows(); i++)

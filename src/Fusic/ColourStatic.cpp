@@ -120,13 +120,14 @@ void CColourStatic::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 
 	//paint the background of the control:
 	dc.FillSolidRect(rt, m_colBgColour);
+//	dc.SetBkMode(TRANSPARENT);
 
 	//set the text colour:
 	dc.SetTextColor(m_colTxtColour);
 	
 	//draw out the text:
 	this->GetWindowTextA(strText);
-	dc.DrawText(strText, rt, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+	dc.DrawText(strText, rt, DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX);
 
 	//free memory:
 	dc.Detach();

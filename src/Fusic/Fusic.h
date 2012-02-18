@@ -9,11 +9,8 @@
 
 #include "resource.h"		// main symbols
 
-//FOR DEBUGGING ONLY:
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-
+//help memory leak detection:
+//#include <vld.h>
 
 
 // CFusicApp:

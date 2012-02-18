@@ -15,49 +15,49 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_1829DB4291E84D1EA060EDE9EBF3B820"
-        "OwnerKey" = "8:_6FB703D873A345B290A6A71FED387907"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_39AB0865B1DCB7C850B9B0334DD475F0"
+        "MsmKey" = "8:_21B72FBCCE6BCECE4AD19F7AE6C90C89"
         "OwnerKey" = "8:_F8DF80F5B6F74021AA09124C358E3265"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_42D1201D75744B4AAF9DE4BF35BEED76"
-        "OwnerKey" = "8:_7275359D39BE4070BAE9F9066AC316F1"
+        "MsmKey" = "8:_4E8CE421B3D94AAB923E1329A098F079"
+        "OwnerKey" = "8:_949F80BF512D4DD087D00BC1CE295D2D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6FB703D873A345B290A6A71FED387907"
+        "MsmKey" = "8:_6D3EBA32904FAE3123DE0ADB7BF771D7"
         "OwnerKey" = "8:_F8DF80F5B6F74021AA09124C358E3265"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7275359D39BE4070BAE9F9066AC316F1"
-        "OwnerKey" = "8:_F8DF80F5B6F74021AA09124C358E3265"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7A9CBF2298C42316F30A46085F1462F6"
-        "OwnerKey" = "8:_F8DF80F5B6F74021AA09124C358E3265"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_845C6DA27A294BBFB74274E733EDDBB0"
+        "MsmKey" = "8:_72E892064F8946229A785F8DB939308D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B83DAB630A9297D1FA42D3A92638CD49"
+        "MsmKey" = "8:_949F80BF512D4DD087D00BC1CE295D2D"
+        "OwnerKey" = "8:_F8DF80F5B6F74021AA09124C358E3265"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AC4E9FBAB8D54257A81BA3F19EB8499D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C7ED191AC3F2481295B4F9B12A9CDD66"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CD1499E91D3D5E4FA241591A8EE2C4D2"
         "OwnerKey" = "8:_F8DF80F5B6F74021AA09124C358E3265"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -69,14 +69,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E0C370845EFA4428B684455A8B2677F7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F4927869F7B64A5488BDC337877D381B"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_E3D99EBE6064491EBD9D5BA112048AD5"
+        "OwnerKey" = "8:_F973A9F2FE6144E0BFAD2C454CE66EFA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -87,7 +81,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FD0C93FD7BA94C7AAE9F32AB3E7461CD"
+        "MsmKey" = "8:_F973A9F2FE6144E0BFAD2C454CE66EFA"
+        "OwnerKey" = "8:_F8DF80F5B6F74021AA09124C358E3265"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FA2A0DA918EC442B91DD583439358D4E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -116,6 +116,24 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5"
+                    {
+                    "Name" = "8:.NET Framework 3.5"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.9.0.x86"
+                    {
+                    "Name" = "8:Visual C++ Runtime Libraries (x86)"
+                    "ProductCode" = "8:Microsoft.Visual.C++.9.0.x86"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -142,10 +160,15 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5"
                     {
-                    "Name" = "8:.NET Framework 3.5 SP1"
-                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
+                    "Name" = "8:.NET Framework 3.5"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.9.0.x86"
+                    {
+                    "Name" = "8:Visual C++ Runtime Libraries (x86)"
+                    "ProductCode" = "8:Microsoft.Visual.C++.9.0.x86"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
@@ -175,27 +198,7 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_39AB0865B1DCB7C850B9B0334DD475F0"
-            {
-            "SourcePath" = "8:DlPortIO.dll"
-            "TargetName" = "8:DlPortIO.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_CEE1D4F826B14296A02F8DA51935249B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A9CBF2298C42316F30A46085F1462F6"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_21B72FBCCE6BCECE4AD19F7AE6C90C89"
             {
             "SourcePath" = "8:BASS.dll"
             "TargetName" = "8:BASS.dll"
@@ -215,27 +218,7 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_845C6DA27A294BBFB74274E733EDDBB0"
-            {
-            "SourcePath" = "8:..\\..\\..\\bassflac24\\bassflac.dll"
-            "TargetName" = "8:bassflac.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_CEE1D4F826B14296A02F8DA51935249B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B83DAB630A9297D1FA42D3A92638CD49"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D3EBA32904FAE3123DE0ADB7BF771D7"
             {
             "SourcePath" = "8:mysqlpp.dll"
             "TargetName" = "8:mysqlpp.dll"
@@ -255,10 +238,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D0268D8AF13EC509E617B18CF4F012A5"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_72E892064F8946229A785F8DB939308D"
             {
-            "SourcePath" = "8:WLDAP32.dll"
-            "TargetName" = "8:WLDAP32.dll"
+            "SourcePath" = "8:..\\..\\lib\\bassflac.dll"
+            "TargetName" = "8:bassflac.dll"
             "Tag" = "8:"
             "Folder" = "8:_CEE1D4F826B14296A02F8DA51935249B"
             "Condition" = "8:"
@@ -272,12 +255,12 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0C370845EFA4428B684455A8B2677F7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AC4E9FBAB8D54257A81BA3F19EB8499D"
             {
-            "SourcePath" = "8:..\\..\\..\\basswm24\\basswma.dll"
+            "SourcePath" = "8:..\\..\\lib\\basswma.dll"
             "TargetName" = "8:basswma.dll"
             "Tag" = "8:"
             "Folder" = "8:_CEE1D4F826B14296A02F8DA51935249B"
@@ -295,9 +278,9 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F4927869F7B64A5488BDC337877D381B"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C7ED191AC3F2481295B4F9B12A9CDD66"
             {
-            "SourcePath" = "8:C:\\Program Files\\MySQL\\MySQL Server 5.1\\lib\\opt\\libmysql.dll"
+            "SourcePath" = "8:..\\..\\lib\\libmysql.dll"
             "TargetName" = "8:libmysql.dll"
             "Tag" = "8:"
             "Folder" = "8:_CEE1D4F826B14296A02F8DA51935249B"
@@ -315,9 +298,49 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FD0C93FD7BA94C7AAE9F32AB3E7461CD"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CD1499E91D3D5E4FA241591A8EE2C4D2"
             {
-            "SourcePath" = "8:..\\..\\..\\bass_aac24\\bass_aac.dll"
+            "SourcePath" = "8:RPCRT4.dll"
+            "TargetName" = "8:RPCRT4.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_CEE1D4F826B14296A02F8DA51935249B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D0268D8AF13EC509E617B18CF4F012A5"
+            {
+            "SourcePath" = "8:WLDAP32.dll"
+            "TargetName" = "8:WLDAP32.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_CEE1D4F826B14296A02F8DA51935249B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA2A0DA918EC442B91DD583439358D4E"
+            {
+            "SourcePath" = "8:..\\..\\lib\\bass_aac.dll"
             "TargetName" = "8:bass_aac.dll"
             "Tag" = "8:"
             "Folder" = "8:_CEE1D4F826B14296A02F8DA51935249B"
@@ -414,7 +437,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Fusic"
         "ProductCode" = "8:{D4D5A11C-D8EA-4BC0-B716-F677468F83BC}"
-        "PackageCode" = "8:{43D61502-2681-4A4F-8622-047CA53B82DF}"
+        "PackageCode" = "8:{E7CD18A8-7794-4E79-A23A-D07A8EC2630E}"
         "UpgradeCode" = "8:{29C4AA2A-FD31-4D83-97D3-AC24721F3E87}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -533,7 +556,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_871599538BE74F06B9324D7A4FF3EDFB"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_705351BE61D345A5B0A3CE2EB9F79813"
             {
             "Name" = "8:Fusic"
             "Arguments" = "8:"
@@ -547,7 +570,7 @@
             "Icon" = "8:_F8DF80F5B6F74021AA09124C358E3265"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EABD49F1297448D4B3F626929F9B4549"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D68A9FD8489143AB9D905A27B440B3AE"
             {
             "Name" = "8:Fusic"
             "Arguments" = "8:"
@@ -957,7 +980,7 @@
         }
         "MergeModule"
         {
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_1829DB4291E84D1EA060EDE9EBF3B820"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_4E8CE421B3D94AAB923E1329A098F079"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -971,21 +994,7 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_42D1201D75744B4AAF9DE4BF35BEED76"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:microsoft_vc90_crt_x86.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_6FB703D873A345B290A6A71FED387907"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_949F80BF512D4DD087D00BC1CE295D2D"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -999,7 +1008,21 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_7275359D39BE4070BAE9F9066AC316F1"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_E3D99EBE6064491EBD9D5BA112048AD5"
+            {
+            "UseDynamicProperties" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "SourcePath" = "8:microsoft_vc90_crt_x86.msm"
+                "Properties"
+                {
+                }
+            "LanguageId" = "3:0"
+            "Exclude" = "11:FALSE"
+            "Folder" = "8:"
+            "Feature" = "8:"
+            "IsolateTo" = "8:"
+            }
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_F973A9F2FE6144E0BFAD2C454CE66EFA"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"

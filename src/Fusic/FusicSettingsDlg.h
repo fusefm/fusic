@@ -37,4 +37,7 @@ public:
 	afx_msg void OnBnClickedEditaccessgroups();
 	afx_msg void OnBnClickedBtnFaderstartBrowse();
 	CEdit m_ctlFaderStartEXE;
+	CEdit m_ctlFaderStartAddress;
+	CButton m_ctlCheckFaderStart;
+	afx_msg void OnBnClickedCheckEnableFaderstart();
 };

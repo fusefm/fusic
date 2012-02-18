@@ -2,7 +2,6 @@
 
 #include "ColourButton.h"		//needed for Colour Button subclass.
 #include "bass.h"				//needed for bass library functions.
-//#include "globals.h"			//needed for global variable access.
 // CCallbackButton
 
 class CCallbackButton : public CColourButton

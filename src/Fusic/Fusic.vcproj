@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\Fusic\external&quot;;&quot;C:\Program Files\MySQL\MySQL Server 5.1\include&quot;"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\MySQL\MySQL Server 5.5\include&quot;;&quot;$(SolutionDir)\Fusic\external&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,15 +61,16 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories="$(IntDir)"
+				AdditionalIncludeDirectories="&quot;$(IntDir)&quot;;&quot;C:\Program Files\MySQL\MySQL Server 5.5\include&quot;"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="mysqlpp_d.lib bass.lib Wldap32.lib dlportio.lib"
+				AdditionalDependencies="wsock32.lib libmysql.lib mysqlpp_d.lib bass.lib Wldap32.lib Rpcrt4.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="F:\Fuse\Fusic\lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -127,7 +128,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)\Fusic\external&quot;;&quot;C:\Program Files\MySQL\MySQL Server 5.1\include&quot;"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\MySQL\MySQL Server 5.5\include&quot;;&quot;$(SolutionDir)\Fusic\external&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
 				MinimalRebuild="false"
 				RuntimeLibrary="2"
@@ -150,8 +151,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="mysqlpp.lib bass.lib Wldap32.lib DLPORTIO.lib"
+				AdditionalDependencies="wsock32.lib libmysql.lib mysqlpp.lib bass.lib Wldap32.lib Rpcrt4.lib"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="F:\Fuse\Fusic\lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -190,7 +192,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\BackgroundController.cpp"
+				RelativePath=".\AutoDJ.cpp"
 				>
 			</File>
 			<File
@@ -282,6 +284,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PlaylistButtonHalt.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PlaylistButtonLoad.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PlaylistButtonUnload.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -305,10 +319,6 @@
 				RelativePath=".\StopAllButton.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\test.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -316,7 +326,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\BackgroundController.h"
+				RelativePath=".\AutoDJ.h"
 				>
 			</File>
 			<File
@@ -345,10 +355,6 @@
 			</File>
 			<File
 				RelativePath=".\ColourStaticTimer.h"
-				>
-			</File>
-			<File
-				RelativePath=".\external\Dlportio.h"
 				>
 			</File>
 			<File
@@ -408,6 +414,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PlaylistButtonHalt.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PlaylistButtonLoad.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PlaylistButtonUnload.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource.h"
 				>
 			</File>
@@ -421,10 +439,6 @@
 			</File>
 			<File
 				RelativePath=".\targetver.h"
-				>
-			</File>
-			<File
-				RelativePath=".\test.h"
 				>
 			</File>
 		</Filter>

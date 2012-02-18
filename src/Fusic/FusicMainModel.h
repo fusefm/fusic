@@ -10,7 +10,7 @@ extern dbSettings g_sctDBSettings;
 
 class CFusicMainModel
 {
-public:
+public:                                          
 	//constructor:
 	CFusicMainModel(void);
 
@@ -30,32 +30,63 @@ public:
 	//fnGetDurationForFileID - get the duration for a certain FileID:
 	double fnGetDurationForFileID(int FileID);
 
-	mysqlpp::StoreQueryResult fnGetFilesForPlaylistIDAndSearchTitle
+	//fnGetFilesForPlaylistIDAndSearchTitle - return the files
+	//that are in a playlist and fit a search string :
+	mysqlpp::StoreQueryResult fnGetFilesForPlaylistIDAndSearchString
 	(int playlistID, CString searchString);
-	mysqlpp::StoreQueryResult fnGetFilesForPlaylistIDAndSearchArtist
-	(int playlistID, CString searchString);
-	//
+
+	//fnGetFilesForPlaylistID - return all the files that are contained
+	//within a certain playlist:
 	mysqlpp::StoreQueryResult fnGetFilesForPlaylistID(int playlistID);
 
-	mysqlpp::StoreQueryResult fnGetSweepersForSongID(int fileID);
+	//fnGetSweepersForSongID - return all sweepers that can be played
+	//for a certain File:
+	mysqlpp::StoreQueryResult fnGetSweepersForSongID(int fileID, int showID);
 
-	mysqlpp::StoreQueryResult fnGetSongsForShowIDAndSearchStringArtist(int showID,
+	//fnGetSongsForShowIDAndSearchStringArtist - return all files for a certain
+	//show that corrispond to the search string:
+	mysqlpp::StoreQueryResult fnGetSongsForShowIDAndSearchString(int showID,
 		CString searchString);
 
-	mysqlpp::StoreQueryResult fnGetSongsForShowIDAndSearchStringSong(int showID,
-		CString searchString);
-
+	//fnGetPlaylistInfroForShowID - return a list of playlists for a certain
+	//show:
 	mysqlpp::StoreQueryResult fnGetPlaylistInfroForShowID(int showID);
 
+	//fnGetJinglesForShowID - retrun a list of jingles for a certain show:
 	mysqlpp::StoreQueryResult fnGetJinglesForShowID(int showID);
 
-	void fnLogFile(int fileID);
+	//fnGetJInglesForShowIDAndSearchString - get a list of jingles for a certain
+	//show and that match a search string for title:
+	mysqlpp::StoreQueryResult fnGetJInglesForShowIDAndSearchString(int showID,
+		CString searchString);
+
+	//fnGetFilesExcludingFilesAndArtist - Return a list of files for show ID 0,
+	//that exclude an array for file IDs and file Artists:
+	mysqlpp::StoreQueryResult fnGetFilesExcludingFilesAndArtist
+		(std::vector<int> files,  std::vector<CString> artists);
+
+	//fnGetFilesPlaiedInTheLast - returns a list of files that have been played within
+	//the last number of hours:
+	mysqlpp::StoreQueryResult fnGetFilesPlaiedInTheLast(int hour);
+
+	//fnLogFile - Log that a file has been played in the database:
+	void fnLogFile(int fileID, int showID);
+
+	bool fnCheckMachineOnAir();
+	void fnSetMachineOnAir();
+
+		//fnGetSettings - get the settings.
+	bool fnGetSettings();
+
+	mysqlpp::StoreQueryResult fnGetFilesToExclude(std::vector<int>& files, 
+								  std::vector<CString>& artists);
 
 
 private:
 	//private methods:
 
-	//connect - connect to the MySQL database:
+	//connect() - create a new MySQL object and connect it to the
+	//database:
 	bool connect();
 
 	//disconnect to the database:

@@ -39,10 +39,13 @@ extern dbSettings g_sctDBSettings;
 extern int g_intCartsDev;
 extern int g_intMusicDev;
 extern CString g_strLDAPHost;
+extern CString g_systemID;
 extern CString g_strLDAPSearchAttri;
 extern CString g_StrLDAPSearchBase;
 extern std::vector<CString> g_vecAG;
 extern CString g_strFaderStartEXE;
+extern bool faderStart;
+extern int faderStartAddress;
 
 BOOL CFusicApp::InitInstance()
 {
@@ -65,7 +68,7 @@ BOOL CFusicApp::InitInstance()
 	CString strAccessGroups;	//access groups temp string.
 	//need to get global info:
 	SetRegistryKey("Fuse FM Software");
-	
+
 	//get the password;
 	g_strSettingsPassword = GetProfileString("", "SettingsPassword");
 	if(g_strSettingsPassword == "")
@@ -97,15 +100,53 @@ BOOL CFusicApp::InitInstance()
 		g_sctDBSettings.strDBPassword = 
 			GetProfileString("Database Settings", "Password");
 
+
 		//LDAP Settings:
 		g_strLDAPHost = GetProfileString("LDAP Settings", "Host");
 		g_strLDAPSearchAttri = GetProfileString("LDAP Settings", "BindAttribute");
 		g_StrLDAPSearchBase = GetProfileString("LDAP Settings", "BindBase");
 		strAccessGroups = GetProfileString("LDAP Settings", "AccessGroups");
 
+		//get unique string:
+		g_systemID = GetProfileString("", "HostString");
+		if(g_systemID == "")
+		{
+			//generate a system ID:
+			UUID* uu = new UUID();
+			RPC_CSTR sTemp;
+			if(uu != NULL)
+			{
+				UuidCreateSequential(uu);
+				UuidToString(uu, &sTemp);
+				g_systemID = sTemp;
+				RpcStringFree(&sTemp);
+				WriteProfileString("", "HostString", g_systemID);
+				delete uu;
+				uu = NULL;
+			}
+			else
+			{
+				MessageBox(NULL, "ERROR: could not create a host string,"
+					"On-Air checking disabled.", "Fusic", MB_ICONERROR);
+			}
+		}
+
 		//sound options:
 		g_intCartsDev = GetProfileInt("Sound Settings", "CartsOutputDev",0);
 		g_intMusicDev = GetProfileInt("Sound Settings", "MusicOutputDev",0);
+
+		//fader start opts
+		int temp = GetProfileInt("Fader Start Settings", "FaderStartEnabled",  0);
+		if(temp == 0)
+		{
+			faderStart = false;
+		}
+		else
+		{
+			faderStart = true;
+			faderStartAddress = 
+				GetProfileInt("Fader Start Settings", "FaderStartAddress", 0 );
+		}
 
 		//make sure that we got all settings:
 		if(g_sctDBSettings.strDBDatabase == "")
@@ -238,6 +279,7 @@ BOOL CFusicApp::InitInstance()
 	BASS_PluginLoad("bass_aac.dll", 0);
 	BASS_PluginLoad("bassflac.dll", 0);
 	BASS_PluginLoad("basswma.dll", 0);
+	BASS_PluginLoad("bass_alac.dll", 0);
 
 	//show the login dialog:
 	CFusicLoginDlg dlg;

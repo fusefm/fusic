@@ -21,7 +21,7 @@ public:
 
 	// fnStart - start a file playing and return
 	//the length of the file:
-	double fnStart(CString fileLocation);
+	double fnStart(CString fileLocation, double fadeIn, double fadeOut);
 
 	//fnReset - this will reset the bass class so when
 	//the stream stops:
@@ -40,7 +40,7 @@ public:
 	// passed (in miliseconds):
 	void fnFadeOut(int duration, bool stop);
 	double fnStartWithSweeper(CString fileLocation, CString sweeperLocation,
-		double introTime);
+		double introTime, double fadeIn, double fadeOut);
 	double fnGetSweeperLength();
 	HSTREAM fnGetCurrentStream();
 	void fnSetSweeperLength(double d);
@@ -48,10 +48,17 @@ public:
 	void fnStop(double fadeDownTime);
 	HSTREAM fnGetCurrentSweeperStream();
 	BOOL m_aboutToPlaySweeper;
+	CFusicMainDlg* fnGetMainDialog();
+	bool isInIntroTime();
+	bool m_currentlyInIntroTime();
+	bool m_CurrentlyPlaying;
+	bool m_fadeing;
+	double m_currentMixOutPoint;
 private:
 	// m_CurrentStreamLength - The length of the current stream:
 	double m_CurrentStreamLength;
 	double m_CurrentSweeperLength;
+	double m_CurrentIntroTime;
 
 	//fnCallbackFadeOut - called when a fadeout has finished so we need
 	//to close the stream to the file:
@@ -65,7 +72,8 @@ private:
 													DWORD data, void* user);
 	static void CALLBACK fnCallbackPause(HSYNC handle, DWORD channel, 
 													DWORD data, void* user);
-
+	static void CALLBACK fnCallbackMixOut(HSYNC handle, DWORD channel, 
+													DWORD data, void* user);
 	// m_CurrentStream - The stream for the currently playing file:
 	HSTREAM m_CurrentStream;
 	
@@ -82,8 +90,6 @@ private:
 
 	//m_MainDlgPointer - A pointer to the main dialog, used for callbacks:
 	CFusicMainDlg* m_MainDlg;
-
-	bool m_CurrentlyPlaying;
 };
 
 

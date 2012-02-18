@@ -430,11 +430,11 @@ void CCartsButton::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	//draw the text before the boarder to prevent overlapping:
 	CString strTemp;
 	GetWindowText(strTemp);
-	dc.DrawText(strTemp, textRt, DT_CENTER | DT_TOP | DT_WORDBREAK);
+	dc.DrawText(strTemp, textRt, DT_CENTER | DT_TOP | DT_WORDBREAK | DT_NOPREFIX);
 
 	//draw the duration at the bottom too:
 	dc.DrawText(m_strPrintDuration, textRt, DT_CENTER | 
-		DT_BOTTOM | DT_SINGLELINE);
+		DT_BOTTOM | DT_SINGLELINE | DT_NOPREFIX);
 
 	//get the state of the button:
 	UINT state = lpDrawItemStruct->itemState;

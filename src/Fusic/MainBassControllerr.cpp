@@ -5,6 +5,8 @@
 #include "Fusic.h"
 #include "MainBassControllerr.h"
 
+extern bool doLog;
+extern playoutSettings g_settings;
 
 // CMainBassControllerr
 
@@ -14,10 +16,12 @@ CMainBassControllerr::CMainBassControllerr(CFusicMainDlg* dlg)
 	m_CurrentStream = 0;
 	m_CurrentStreamLength = 0;
 	m_CurrentSyncEnd = 0;
+	m_CurrentIntroTime = -1;
 	m_CurrentlyPlaying = false;
 	m_CurrentSweeperLength = 0;
 	m_aboutToPlaySweeper = false;
 	m_paused = false;
+	m_fadeing = false;
 
 	//initaliase bass:
 	BASS_Init(g_intMusicDev, 44100, 0, 0, NULL);
@@ -39,8 +43,20 @@ CMainBassControllerr::~CMainBassControllerr()
 // CMainBassControllerr member functions
 
 // fnStart - start a file playing:
-double CMainBassControllerr::fnStart(CString fileLocation)
+double CMainBassControllerr::fnStart(CString fileLocation, 
+									 double fadeIn, double fadeOut)
 {
+	if(doLog)
+	{
+		CString temp1;
+		CString temp2;
+		temp1.Format("%f", fadeIn);
+		temp2.Format("%f", fadeOut);
+		fnLogOutMsg("CMainBassControllerr::fnStart. Beggining playback of file, " +
+			fileLocation);
+		fnLogOutMsg("Fade in point, " + temp1);
+		fnLogOutMsg("Fade out point, " + temp2);
+	}
 
 	//ensure the correct dev is set:
 	BASS_SetDevice(g_intMusicDev);
@@ -51,17 +67,49 @@ double CMainBassControllerr::fnStart(CString fileLocation)
 		fnReset();
 	}
 
+	//intro time = 0 because it doesn't matter if we're not playing a jingle.
+	m_CurrentIntroTime = 0;
 	//create the stream:
 	m_CurrentStream = BASS_StreamCreateFile(false, fileLocation, 0,
 		0,0);
+	if(doLog)
+	{
+		CString temp;
+		temp.Format("%d", m_CurrentStream);
+		fnLogOutMsg("Created stream with result, " + temp);
+	}
 	if(m_CurrentStream == 0)
 	{
 		return 0;
 	}
+	m_currentMixOutPoint = fadeOut;
 	
-	//find the length of the stream:
+	//find the length o	f the stream:
 	m_CurrentStreamLength = BASS_ChannelBytes2Seconds(m_CurrentStream,
 		BASS_ChannelGetLength(m_CurrentStream, BASS_POS_BYTE));
+
+	//ensure that the fade out point isn't after the end of the song
+	//otherwise we will get stuck.
+	if(fadeOut >= m_CurrentStreamLength)
+	{
+		fadeOut = 0;
+	}
+
+	if(fadeOut >= (m_CurrentStreamLength - 
+		(g_settings.mix_out_fade_out_time/1000)))
+	{
+		fadeOut = 0;
+	}
+
+	if(doLog)
+	{
+		CString temp;
+		temp.Format("%f", m_CurrentStreamLength);
+	}
+	//set the mix in point:
+	BASS_ChannelSetPosition(m_CurrentStream, 
+		BASS_ChannelSeconds2Bytes(m_CurrentStream, fadeIn),
+		BASS_POS_BYTE);
 	
 	//begin playing:
 	if(!BASS_ChannelPlay(m_CurrentStream, false))
@@ -69,22 +117,46 @@ double CMainBassControllerr::fnStart(CString fileLocation)
 		return 0;
 	}
 	
-	//setup a sync for the end:
-	m_CurrentSyncEnd = BASS_ChannelSetSync(m_CurrentStream,
-		BASS_SYNC_END, 0, CFusicMainDlg::fnSyncCallbackEnd, m_MainDlg);
-	
+	if(fadeOut != 0)
+	{
+		//setup a sync for the mixdown:
+		BASS_ChannelSetSync(m_CurrentStream, BASS_SYNC_POS,
+			BASS_ChannelSeconds2Bytes(m_CurrentStream, fadeOut), 
+			CMainBassControllerr::fnCallbackMixOut, m_MainDlg);
+	}
+	else
+	{
+		BASS_ChannelSetSync(m_CurrentStream, BASS_SYNC_END,
+		0, CMainBassControllerr::fnCallbackMixOut, m_MainDlg);
+	}
+
 	//we are now playing:
 	m_CurrentlyPlaying = true;
 
 	//done:
+	if(doLog)
+		fnLogOutMsg("done.");
 	return m_CurrentStreamLength;
 }
 
 // fnStart - start a file playing:
 double CMainBassControllerr::fnStartWithSweeper(CString fileLocation,
 												CString sweeperLocation,
-												double introTime)
+												double introTime, double fadeIn,
+												double fadeOut)
 {
+	if(doLog)
+	{
+		fnLogOutMsg("CMainBassControllerr::fnStartWithSweeper. Beggining playback"
+			" of song, " + fileLocation + " with sweeper " + sweeperLocation);
+		CString temp;
+		temp.Format("%f", introTime);
+		fnLogOutMsg("Intro time, " + temp );
+		temp.Format("%f", fadeIn);
+		fnLogOutMsg("Mix in point, " + temp);
+		temp.Format("%f", fadeOut);
+		fnLogOutMsg("Mix out potint, " + temp);
+	}
 	//ensure the correct dev is set:
 	BASS_SetDevice(g_intMusicDev);
 
@@ -97,26 +169,74 @@ double CMainBassControllerr::fnStartWithSweeper(CString fileLocation,
 	//create the stream:
 	m_CurrentStream = BASS_StreamCreateFile(false, fileLocation, 0,
 		0,0);
+	if(doLog)
+	{
+		CString temp;
+		temp.Format("%d", m_CurrentStream);
+		fnLogOutMsg("Created stream with result, " + temp);
+	}
 	if(m_CurrentStream == 0)
 	{
 		return 0;
 	}
 
+	m_currentMixOutPoint = fadeOut;
+
 	//create the sweeper stream:
 	m_CurrentSweeperStream = BASS_StreamCreateFile(false, sweeperLocation, 0,
 		0,0);
+	if(doLog)
+	{
+		CString temp;
+		temp.Format("%d", m_CurrentSweeperStream);
+		fnLogOutMsg("Created sweeper stream with result, " + temp);
+	}
 
 	//find the length of the stream:
 	m_CurrentSweeperLength = BASS_ChannelBytes2Seconds(m_CurrentSweeperStream,
 		BASS_ChannelGetLength(m_CurrentSweeperStream, BASS_POS_BYTE));
-	
-	double callbackFadeDownPos = introTime - m_CurrentSweeperLength - 0.6;
-	double callbackPlaySweep = introTime - m_CurrentSweeperLength - 0.3;
-	double callbackFadeUpPos = introTime - 0.3;
+	m_CurrentIntroTime = introTime;
+	double callbackFadeDownPos = 
+		introTime - m_CurrentSweeperLength - 
+		(double)((g_settings.sweeper_fade_down_time + g_settings.sweeper_fade_up_time)/1000);
+	double callbackPlaySweep = 
+		introTime - m_CurrentSweeperLength - (double)(g_settings.sweeper_fade_up_time/1000);
+	double callbackFadeUpPos = introTime - (double)(g_settings.sweeper_fade_up_time/1000);
+	if(doLog)
+	{
+		CString temp;
+		temp.Format("%f", callbackFadeDownPos);
+		fnLogOutMsg("Fade Down Pos, " + temp);
+		temp.Format("%f", callbackPlaySweep);
+		fnLogOutMsg("Play Sweeper Pos, " + temp);
+		temp.Format("%f", callbackFadeUpPos);
+		fnLogOutMsg("Fade Up Pos, " + temp);
+	}
 	
 	//find the length of the stream:
 	m_CurrentStreamLength = BASS_ChannelBytes2Seconds(m_CurrentStream,
 		BASS_ChannelGetLength(m_CurrentStream, BASS_POS_BYTE));
+	if(doLog)
+	{
+		CString temp;
+		temp.Format("%f", m_CurrentStreamLength);
+		fnLogOutMsg("Found stream length, " + temp);
+	}
+
+	if(fadeOut >= m_CurrentStreamLength)
+	{
+		fadeOut = 0;
+	}
+	
+	if(fadeOut >= (m_CurrentStreamLength - 
+		(g_settings.mix_out_fade_out_time/1000)))
+	{
+		fadeOut = 0;
+	}
+
+	//move to mix in point:
+	BASS_ChannelSetPosition(m_CurrentStream, 
+		BASS_ChannelSeconds2Bytes(m_CurrentStream, fadeIn), BASS_POS_BYTE);
 	
 	//begin playing:
 	if(!BASS_ChannelPlay(m_CurrentStream, false))
@@ -137,10 +257,19 @@ double CMainBassControllerr::fnStartWithSweeper(CString fileLocation,
 		BASS_SYNC_POS, BASS_ChannelSeconds2Bytes(m_CurrentStream, 
 		callbackFadeUpPos),CMainBassControllerr::fnCallbackFadeUpSweeper, this);
 
+	//setup a sync for the mixdown:
+	if(fadeOut != 0)
+	{
+	BASS_ChannelSetSync(m_CurrentStream, BASS_SYNC_POS,
+		BASS_ChannelSeconds2Bytes(m_CurrentStream, fadeOut), 
+		CMainBassControllerr::fnCallbackMixOut, m_MainDlg);
+	}
+	else
+	{
+		BASS_ChannelSetSync(m_CurrentStream, BASS_SYNC_END,
+			0, CMainBassControllerr::fnCallbackMixOut, m_MainDlg);
+	}
 	
-	//setup a sync for the end:
-	m_CurrentSyncEnd = BASS_ChannelSetSync(m_CurrentStream,
-		BASS_SYNC_END, 0, CFusicMainDlg::fnSyncCallbackEnd, m_MainDlg);
 	
 	//we are now playing:
 	m_CurrentlyPlaying = true;
@@ -154,6 +283,8 @@ double CMainBassControllerr::fnStartWithSweeper(CString fileLocation,
 
 void CMainBassControllerr::fnReset()
 {
+	if(doLog)
+		fnLogOutMsg("CMainBassControllerr::fnReset called.");
 	//free the current stream:
 	BASS_StreamFree(m_CurrentStream);
 	
@@ -197,6 +328,17 @@ double CMainBassControllerr::fnGetTimeElapsed(void)
 // passed (in miliseconds):
 void CMainBassControllerr::fnFadeOut(int duration, bool stop)
 {
+	if(doLog)
+	{
+		CString temp;
+		fnLogOutMsg("CMainBassControllerr::fnFadeOut called.");
+		temp.Format("%i", duration);
+		fnLogOutMsg("Duration, " + temp);
+		if(stop == true)
+			fnLogOutMsg("Stop, true");
+		else
+			fnLogOutMsg("Stop, false");
+	}
 	//do some sliding:
 	BASS_ChannelSlideAttribute(m_CurrentStream, BASS_ATTRIB_VOL,
 		0, duration);
@@ -210,38 +352,44 @@ void CMainBassControllerr::fnFadeOut(int duration, bool stop)
 
 	if(stop == true)
 	{
+		m_CurrentIntroTime = -1;
 		m_CurrentlyPlaying = false;
 	}
+}
+CFusicMainDlg* CMainBassControllerr::fnGetMainDialog()
+{
+	return m_MainDlg;
 }
 
 void CMainBassControllerr::fnPause(double fadeDownTime, double fadeUpTime)
 {
 	//we can only pause if we're not playing a sweeper:
-	if(!m_aboutToPlaySweeper)
+	if(!m_fadeing)
 	{
-		if(!m_paused)
-		{
-			//need to slide down:
-			double pos = fnGetTimeElapsed();
-			int iFadeDownTime = (int)(fadeDownTime*1000);
+	if(!m_paused)
+	{
+		//need to slide down:
+		double pos = fnGetTimeElapsed();
+		int iFadeDownTime = (int)(fadeDownTime*1000);
+		m_fadeing = true;
 
-			pos += fadeDownTime;
+		pos += fadeDownTime;
 
-			BASS_ChannelSlideAttribute(m_CurrentStream, BASS_ATTRIB_VOL,
-				0, iFadeDownTime);
-			BASS_ChannelSetSync(m_CurrentStream, BASS_SYNC_POS,
-				BASS_ChannelSeconds2Bytes(
-				fnGetCurrentStream(), pos), &CMainBassControllerr::fnCallbackPause, this);
-			m_paused = true;
-		}
-		else
-		{
-			int iFadeUpTime = (int)(fadeDownTime*1000);
-			BASS_ChannelSlideAttribute(m_CurrentStream, BASS_ATTRIB_VOL,
-				1, iFadeUpTime);
-			BASS_ChannelPlay(fnGetCurrentStream(), false);
-			m_paused = false;
-		}
+		BASS_ChannelSlideAttribute(m_CurrentStream, BASS_ATTRIB_VOL,
+			0, iFadeDownTime);
+		BASS_ChannelSetSync(m_CurrentStream, BASS_SYNC_POS,
+			BASS_ChannelSeconds2Bytes(
+			fnGetCurrentStream(), pos), &CMainBassControllerr::fnCallbackPause, this);
+		m_paused = true;
+	}
+	else
+	{
+		int iFadeUpTime = (int)(fadeDownTime*1000);
+		BASS_ChannelSlideAttribute(m_CurrentStream, BASS_ATTRIB_VOL,
+			1, iFadeUpTime);
+		BASS_ChannelPlay(fnGetCurrentStream(), false);
+		m_paused = false;
+	}
 	}
 }
 
@@ -273,6 +421,8 @@ double CMainBassControllerr::fnGetSweeperLength()
 void CALLBACK CMainBassControllerr::fnCallbackFadeOut(HSYNC handle, DWORD channel, 
 													DWORD data, void* user)
 {
+	if(doLog)
+		fnLogOutMsg("CMainBassControllerr::fnCallbackFadeOut called.");
 	//stop the playback:
 	BASS_ChannelStop(channel);
 
@@ -283,14 +433,21 @@ void CALLBACK CMainBassControllerr::fnCallbackFadeOut(HSYNC handle, DWORD channe
 void CALLBACK CMainBassControllerr::fnCallbackFadeDownSweeper(HSYNC handle, DWORD channel, 
 													DWORD data, void* user)
 {
+	float fadeDownpercentage = (float)(g_settings.sweeper_fade_down_volume/100.0);
+
+	if(doLog)
+		fnLogOutMsg("CMainBassControllerr::fnCallbackFadeDownSweeper called.");
 	CMainBassControllerr* cls = (CMainBassControllerr*)user;
 	BASS_ChannelSlideAttribute(cls->fnGetCurrentStream(), BASS_ATTRIB_VOL,
-		(float)0.4, 300);
+		fadeDownpercentage,
+		g_settings.sweeper_fade_down_time );
 }
 
 void CALLBACK CMainBassControllerr::fnCallbackPlaySweeper(HSYNC handle, DWORD channel, 
 													DWORD data, void* user)
 {
+	if(doLog)
+		fnLogOutMsg("CMainBassControllerr::fnCallbackPlaySweeper called.");
 	CMainBassControllerr* cls = (CMainBassControllerr*)user;
 	BASS_ChannelPlay(cls->fnGetCurrentSweeperStream(), false);
 }
@@ -298,8 +455,11 @@ void CALLBACK CMainBassControllerr::fnCallbackPlaySweeper(HSYNC handle, DWORD ch
 void CALLBACK CMainBassControllerr::fnCallbackPause(HSYNC handle, DWORD channel, 
 													DWORD data, void* user)
 {
+	if(doLog)
+		fnLogOutMsg("CMainBassControllerr::fnCallbackPause called.");
 	CMainBassControllerr* cls = (CMainBassControllerr*)user;
 	BASS_ChannelPause(cls->fnGetCurrentStream());
+	cls->m_fadeing = false;
 
 }
 
@@ -307,11 +467,41 @@ void CALLBACK CMainBassControllerr::fnCallbackPause(HSYNC handle, DWORD channel,
 void CALLBACK CMainBassControllerr::fnCallbackFadeUpSweeper(HSYNC handle, DWORD channel, 
 													DWORD data, void* user)
 {
+	if(doLog)
+		fnLogOutMsg("CMainBassControllerr::fnCallbackFadeUpSweeper called.");
 	CMainBassControllerr* cls = (CMainBassControllerr*)user;
 	BASS_ChannelStop(cls->fnGetCurrentSweeperStream());
 	BASS_StreamFree(cls->fnGetCurrentSweeperStream());
 	BASS_ChannelSlideAttribute(cls->fnGetCurrentStream(), BASS_ATTRIB_VOL,
-		(float)1.0, 300);
+		(float)1.0, g_settings.sweeper_fade_up_time);
 	cls->fnSetSweeperLength(0);
 	cls->m_aboutToPlaySweeper = false;
+}
+
+void CALLBACK CMainBassControllerr::fnCallbackMixOut(HSYNC handle, DWORD channel, 
+													DWORD data, void* user)
+{
+	if(doLog)
+		fnLogOutMsg("CMainBassControllerr::fnCallbackMixOut called.");
+
+	CFusicMainDlg* dlg = (CFusicMainDlg*)user;
+	dlg->m_bass->m_CurrentlyPlaying = false;
+	dlg->fnSyncCallbackEnd(handle, channel, data, user);
+}
+
+bool CMainBassControllerr::isInIntroTime()
+{
+	if(m_CurrentlyPlaying == false)
+	{
+		return false;
+	}
+	if(m_CurrentIntroTime == -1)
+	{
+		return false;
+	}
+	if(m_CurrentIntroTime >= fnGetTimeElapsed())
+	{
+		return true;
+	}
+	return false;
 }

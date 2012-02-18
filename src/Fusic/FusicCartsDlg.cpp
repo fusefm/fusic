@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "Fusic.h"
 #include "FusicCartsDlg.h"
-#include "Dlportio.h"
 //a quick enum to help distringuish between fuse and user carts:
 #define FUSECARTS 1
 #define USERCARTS 2
@@ -14,6 +13,8 @@
 
 //get access to fader start exr:
 extern CString g_strFaderStartEXE;
+extern int faderStartAddress;
+extern bool faderStart;
 
 // CFusicCartsDlg dialog
 
@@ -695,7 +696,7 @@ void CFusicCartsDlg::PostNcDestroy()
 
 	//NOTE: This will need to be changed when the dialog is back on the heap with the 
 	//main dialog::
-	//	delete this;
+	//delete this;
 }
 
 void CFusicCartsDlg::OnBnClickedBtnDebug()
@@ -998,23 +999,22 @@ bool bolRan = false;
 void CFusicCartsDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: Add your message handler code here and/or call default
-	if(nIDEvent == (WM_USER +10))
+	/*if(nIDEvent == (WM_USER +10))
 	{
-		if(g_strFaderStartEXE == "")
+		if(faderStart)
 		{
-			return;
+			int intState = DlPortReadPortUlong((ULONG)faderStartAddress);
+			if(intState == -32 && bolRan == false)
+			{
+				m_pMainDlg->fnFaderStart();
+				bolRan = true;
+			}
+			if(intState == -16 && bolRan == true)
+			{
+				bolRan = false;
+			}
 		}
-		int intState = DlPortReadPortUlong(0x20f);
-		if(intState == -32 && bolRan == false)
-		{
-			m_pMainDlg->OnBnClickedBtnNext();
-			bolRan = true;
-		}
-		if(intState == -16 && bolRan == true)
-		{
-			bolRan = false;
-		}
-	}
+	}*/
 
 	CDialog::OnTimer(nIDEvent);
 }
