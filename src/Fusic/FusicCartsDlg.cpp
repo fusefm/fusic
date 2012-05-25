@@ -1005,6 +1005,10 @@ bool CFusicCartsDlg::connect()
 		//construct the object:
 		m_PMYSQLConn = new mysqlpp::Connection;
 
+		// Set cart wall connection timeout to a day 
+		// TODO: Fix this properly by running a MySQL ping on a timer
+		m_PMYSQLConn->set_option(new mysqlpp::ConnectTimeoutOption(86400));
+
 		//connect to the database:
 		isConnected = m_PMYSQLConn->connect(g_sctDBSettings.strDBDatabase,
 			g_sctDBSettings.strDBHost,
