@@ -190,7 +190,7 @@ BOOL CMainPlaylistController::fnCueSong(int fileID, int sweepIndex, bool jingle)
 		isEmpty = false;
 
 		m_ctlSweep->SetCurSel(indexNoSweeper);
-
+		
 		//exit here, we don't need to do sweeper checking on Jingles:
 		return TRUE;
 	}

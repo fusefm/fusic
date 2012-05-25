@@ -101,6 +101,10 @@ bool CFusicMainModel::fnGetSettings()
 			g_settings.cart_fade_out_time = value;
 		}
 	}
+
+	//disconnect from the database:
+	disconnect();
+
 	return true;
 }
 
@@ -192,7 +196,7 @@ double CFusicMainModel::fnGetIntroTimeForFileID(int FileID, bool disconnectAfter
 
 	res = doQuery(sqlQuery);
 
-	if(disconnectAfteryQuery == true)
+	if(disconnectAfteryQuery)
 	{
 		disconnect();
 	}
@@ -402,12 +406,14 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetSweepersForSongID(int fileID, in
 	//ensure we got a valid result:
 	if(resFile.size() == 0)
 	{
+		disconnect();
 		return res;
 	}
 
 	//ensure that the song has an intro:
 	if(resFile[0]["File_Intro"] == mysqlpp::null)
 	{
+		disconnect();
 		return res;
 	}
 	else
@@ -852,6 +858,8 @@ void CFusicMainModel::fnLogFile(int fileID, int showID)
 //database:
 bool CFusicMainModel::connect()
 {
+	printf("Connecting...");
+
 	//construct the object:
 	m_pMySQLConn = new mysqlpp::Connection;
 
@@ -865,6 +873,8 @@ bool CFusicMainModel::connect()
 //disconnect - disconnect from the database:
 void CFusicMainModel::disconnect()
 {
+	printf("Disconnecting...");
+
 	if(m_pMySQLConn != NULL)
 	{
 		//close the connection:
@@ -875,6 +885,8 @@ void CFusicMainModel::disconnect()
 
 		//reset the pointer:
 		m_pMySQLConn = NULL;
+
+		printf("Disconnected...");
 	}
 }
 

@@ -8,12 +8,6 @@
 #define FUSECARTS 1
 #define USERCARTS 2
 
-//get access to callback maps:
-
-
-//get access to fader start exr:
-extern CString g_strFaderStartEXE;
-extern int faderStartAddress;
 extern bool faderStart;
 
 // CFusicCartsDlg dialog

@@ -268,7 +268,7 @@ void CFusicSettingsDlg::OnBnClickedOk()
 
 	//we connected:
 	conn.disconnect();
-	MessageBox("Datbase connection successful, saving settings.",
+	MessageBox("Database connection successful, saving settings.",
 		"Fusic Settings", MB_OK | MB_ICONINFORMATION);
 
 	//store registry settings:
