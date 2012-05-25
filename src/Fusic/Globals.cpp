@@ -18,13 +18,11 @@ void fnLogOutMsg( const CString& msg ) {
 dbSettings g_sctDBSettings;		//settings for DB access, populated at
 								//app startup.
 playoutSettings g_settings;
-CString g_strFaderStartEXE;		//fader start EXE path. (optional)
 
 CString g_strLDAPHost;			//LDAP Host option.
 CString g_strLDAPSearchAttri;	//LDAP Search Attribute.
 CString g_StrLDAPSearchBase;	//LDAP Search Base.
 std::vector<CString> g_vecAG;	//LDAP Access Groups Vector.
-int faderStartAddress;
 bool faderStart;
 CString g_systemID;
 

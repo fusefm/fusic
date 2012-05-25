@@ -20,8 +20,6 @@ extern CString g_strLDAPHost;
 extern CString g_strLDAPSearchAttri;
 extern CString g_StrLDAPSearchBase;
 extern std::vector<CString> g_vecAG;
-extern CString g_strFaderStartEXE;
-extern int faderStartAddress;
 extern bool faderStart;
 
 // CFusicSettingsDlg dialog
@@ -52,7 +50,6 @@ void CFusicSettingsDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_LDAP_BINDATTRIBUTE, m_ctlLDAPBindAttribute);
 	DDX_Control(pDX, IDC_EDIT_LDAP_BASE, m_ctlLDAPBindBase);
 	DDX_Control(pDX, IDC_STATIC_AGCOUNT, m_ctlLDAPAccessGroupsCount);
-	DDX_Control(pDX, IDC_EDIT_FADERSTART_ADDRESS, m_ctlFaderStartAddress);
 	DDX_Control(pDX, IDC_CHECK_ENABLE_FADERSTART, m_ctlCheckFaderStart);
 }
 
@@ -61,8 +58,6 @@ BEGIN_MESSAGE_MAP(CFusicSettingsDlg, CDialog)
 	ON_BN_CLICKED(IDOK, &CFusicSettingsDlg::OnBnClickedOk)
 	ON_CBN_SELCHANGE(IDC_COMBO_SOUND_CART, &CFusicSettingsDlg::OnCbnSelchangeComboSoundCart)
 	ON_BN_CLICKED(IDC_BTN_EDITACCESSGROUPS, &CFusicSettingsDlg::OnBnClickedEditaccessgroups)
-	ON_BN_CLICKED(IDC_BTN_FADERSTART_BROWSE, &CFusicSettingsDlg::OnBnClickedBtnFaderstartBrowse)
-	ON_BN_CLICKED(IDC_CHECK_ENABLE_FADERSTART, &CFusicSettingsDlg::OnBnClickedCheckEnableFaderstart)
 END_MESSAGE_MAP()
 
 
@@ -84,19 +79,13 @@ BOOL CFusicSettingsDlg::OnInitDialog()
 		m_ctlLDAPBindAttribute.SetWindowTextA(g_strLDAPSearchAttri);
 		m_ctlLDAPBindBase.SetWindowTextA(g_StrLDAPSearchBase);
 		m_ctlLDAPHost.SetWindowTextA(g_strLDAPHost);
-		CString address;
-		address.Format("%x", faderStartAddress);
-		m_ctlFaderStartAddress.SetWindowTextA(address);
 		if(faderStart)
 		{
 			m_ctlCheckFaderStart.SetCheck(BST_CHECKED);
-			m_ctlFaderStartAddress.EnableWindow(true);
 		}
 		else
 		{
 			m_ctlCheckFaderStart.SetCheck(BST_UNCHECKED);
-			m_ctlFaderStartAddress.EnableWindow(false);
-
 		}
 	}
 	//populate the sound comobo boxes:
@@ -143,7 +132,6 @@ void CFusicSettingsDlg::OnBnClickedOk()
 	CString strLDAPHost;
 	CString strLDAPBindAttribute;
 	CString strLDAPBindBase;
-	CString strFaderStartAddress;
 	bool doFaderStart;
 
 	//get the options:
@@ -251,8 +239,6 @@ void CFusicSettingsDlg::OnBnClickedOk()
 		return;
 	}
 
-	int theIntAddress;
-	CString theAddress;
 	if(m_ctlCheckFaderStart.GetCheck() == BST_UNCHECKED)
 	{
 		doFaderStart = false;
@@ -260,17 +246,6 @@ void CFusicSettingsDlg::OnBnClickedOk()
 	else
 	{
 		doFaderStart = true;
-		m_ctlFaderStartAddress.GetWindowTextA(theAddress);
-		if(theAddress.IsEmpty())
-		{
-			MessageBox("Please enter a port base address if you want to "
-				"use fader start.", "Fusic Settings", MB_OK | MB_ICONERROR);
-			return;
-		}
-		//we got an address, convert it to an int value;
-		sscanf_s(theAddress.GetBuffer(), "%x",	&theIntAddress);
-		theAddress.ReleaseBuffer();
-
 	}
 
 	//see if we can connect with the options specified:
@@ -324,12 +299,10 @@ void CFusicSettingsDlg::OnBnClickedOk()
 	if(doFaderStart == false)
 	{
 		app->WriteProfileInt("Fader Start Settings", "FaderStartEnabled", 0);
-		app->WriteProfileInt("Fader Start Settings", "FaderStartAdderss", 0);
 	}
 	else
 	{
 		app->WriteProfileInt("Fader Start Settings", "FaderStartEnabled", 1);
-		app->WriteProfileInt("Fader Start Settings", "FaderStartAddress", theIntAddress);
 	}
 
 	//set the global settings:
@@ -343,8 +316,7 @@ void CFusicSettingsDlg::OnBnClickedOk()
 	g_strLDAPHost = strLDAPHost;
 	g_strLDAPSearchAttri = strLDAPBindAttribute;
 	g_StrLDAPSearchBase = strLDAPBindBase;
-	faderStart = true;
-	faderStartAddress = theIntAddress;
+	faderStart = doFaderStart;
 	
 	//successful:
 	OnOK();
@@ -371,33 +343,4 @@ void CFusicSettingsDlg::OnBnClickedEditaccessgroups()
 	//set the size:
 	m_ctlLDAPAccessGroupsCount.SetWindowTextA(strSize);
 
-}
-
-void CFusicSettingsDlg::OnBnClickedBtnFaderstartBrowse()
-{
-	//create a file chooser:
-	CFileDialog dlgFilePicker(TRUE,NULL,NULL,NULL,
-		"Executable Files (*.exe)|*.exe|Batch Files(*.bat)|*.bat|"
-		"All Files (*.*)|*.*||");
-
-	//show the dialog:
-	int intResult = dlgFilePicker.DoModal();
-
-	if(intResult == IDOK)
-	{
-		m_ctlFaderStartEXE.SetWindowTextA(dlgFilePicker.GetPathName());
-	}
-
-}
-
-void CFusicSettingsDlg::OnBnClickedCheckEnableFaderstart()
-{
-	if(m_ctlCheckFaderStart.GetCheck() == BST_CHECKED)
-	{	
-		m_ctlFaderStartAddress.EnableWindow(true);
-	}
-	else
-	{
-		m_ctlFaderStartAddress.EnableWindow(false);
-	}
 }

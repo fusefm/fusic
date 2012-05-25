@@ -102,8 +102,6 @@
 #define IDC_BTN_DEBUG                   1071
 #define IDC_STATIC_CARTSLIST            1072
 #define IDC_STATIC_CARTS_LIST_TIME      1073
-#define IDC_EDIT_FADERSTART_EXE         1074
-#define IDC_BTN_FADERSTART_BROWSE       1075
 #define IDC_STATIC_NOWPLAYING           1076
 #define IDC_STATIC_TITLE                1077
 #define IDC_STATC_ARTIST                1078
@@ -192,7 +190,6 @@
 #define IDC_CHECK_ENABLE_FADERSTART     1152
 #define IDC_STATIC_PLAYLIST_INTRO1      1152
 #define IDC_EDIT1                       1153
-#define IDC_EDIT_FADERSTART_ADDRESS     1153
 #define IDC_STATIC_PLAYLIST_INTRO2      1153
 #define IDC_STATIC_PLAYLIST_INTRO3      1154
 #define IDC_STATIC_PLAYLIST_INTRO4      1155

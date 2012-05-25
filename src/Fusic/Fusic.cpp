@@ -43,9 +43,7 @@ extern CString g_systemID;
 extern CString g_strLDAPSearchAttri;
 extern CString g_StrLDAPSearchBase;
 extern std::vector<CString> g_vecAG;
-extern CString g_strFaderStartEXE;
 extern bool faderStart;
-extern int faderStartAddress;
 
 BOOL CFusicApp::InitInstance()
 {
@@ -84,9 +82,6 @@ BOOL CFusicApp::InitInstance()
 	else
 	{
 		//get the rest of the settings:
-
-		g_strFaderStartEXE = 
-			GetProfileString("", "FaderStartEXE","");
 
 		g_sctDBSettings.strDBHost = 
 			GetProfileString("Database Settings", "Host");
@@ -144,8 +139,6 @@ BOOL CFusicApp::InitInstance()
 		else
 		{
 			faderStart = true;
-			faderStartAddress = 
-				GetProfileInt("Fader Start Settings", "FaderStartAddress", 0 );
 		}
 
 		//make sure that we got all settings:
