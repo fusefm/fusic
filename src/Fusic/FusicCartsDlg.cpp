@@ -23,8 +23,9 @@ CFusicCartsDlg::CFusicCartsDlg(CWnd* pParent,CFusicLoginDlg* pLoginDialog, CFusi
 
 	m_pMainDlg = pMainDlg;
 
+	isConnected = false;
 	//get the mysqlpp connection object:
-	m_PMYSQLConn = new mysqlpp::Connection(false);
+	m_PMYSQLConn = NULL;
 
 	//setup the accelerator:
 	m_hAccelTable = LoadAccelerators(AfxGetInstanceHandle(),
@@ -42,8 +43,7 @@ CFusicCartsDlg::~CFusicCartsDlg()
 {
 
 	//remove the connection:
-	m_PMYSQLConn->disconnect();
-	delete m_PMYSQLConn;
+	disconnect();
 
 }
 
@@ -204,10 +204,7 @@ BOOL CFusicCartsDlg::OnInitDialog()
 
 
 	//create the connection to mysql:
-	if(!m_PMYSQLConn->connect(g_sctDBSettings.strDBDatabase,
-		g_sctDBSettings.strDBHost,
-		g_sctDBSettings.strDBUser,
-		g_sctDBSettings.strDBPassword))
+	if(!connect())
 	{
 		//we didnt connect:
 		CString strError;
@@ -620,17 +617,10 @@ mysqlpp::StoreQueryResult CFusicCartsDlg::fnGetResultSetForQuery(CString strSQLQ
 			{
 			case IDYES:
 				//old object is invalid:
-				m_PMYSQLConn->disconnect();
-				delete m_PMYSQLConn;
-
-				//get a new object:
-				m_PMYSQLConn = new mysqlpp::Connection(false);
+				disconnect();
 
 				//attempt to reconnect:
-				if(!m_PMYSQLConn->connect(g_sctDBSettings.strDBDatabase,
-					g_sctDBSettings.strDBHost,
-					g_sctDBSettings.strDBUser,
-					g_sctDBSettings.strDBPassword))
+				if(!connect())
 				{
 					//we didnt connect:
 					CString strError;
@@ -658,17 +648,11 @@ mysqlpp::StoreQueryResult CFusicCartsDlg::fnGetResultSetForQuery(CString strSQLQ
 			intLoopCounter ++;
 
 			//old object is invalid:
-			m_PMYSQLConn->disconnect();
-			delete m_PMYSQLConn;
-
-			//get a new object:
-			m_PMYSQLConn = new mysqlpp::Connection(false);
+			disconnect();
 
 			//attempt to reconnect:
-			m_PMYSQLConn->connect(g_sctDBSettings.strDBDatabase,
-				g_sctDBSettings.strDBHost,
-				g_sctDBSettings.strDBUser,
-				g_sctDBSettings.strDBPassword);
+			connect();
+
 			//redo the query:
 			return fnGetResultSetForQuery(strSQLQuery);
 		}
@@ -1011,4 +995,39 @@ void CFusicCartsDlg::OnTimer(UINT_PTR nIDEvent)
 	}*/
 
 	CDialog::OnTimer(nIDEvent);
+}
+
+//connect() - create a new MySQL object and connect it to the
+//database:
+bool CFusicCartsDlg::connect()
+{
+	if (!isConnected) {
+		//construct the object:
+		m_PMYSQLConn = new mysqlpp::Connection;
+
+		//connect to the database:
+		isConnected = m_PMYSQLConn->connect(g_sctDBSettings.strDBDatabase,
+			g_sctDBSettings.strDBHost,
+			g_sctDBSettings.strDBUser,
+			g_sctDBSettings.strDBPassword);
+
+	}
+	return isConnected;
+}
+
+//disconnect - disconnect from the database:
+void CFusicCartsDlg::disconnect()
+{
+	if(m_PMYSQLConn != NULL)
+	{
+		//close the connection:
+		m_PMYSQLConn->disconnect();
+
+		//delete the object:
+		delete m_PMYSQLConn;
+
+		//reset the pointer:
+		m_PMYSQLConn = NULL;
+	}
+	isConnected = false;
 }

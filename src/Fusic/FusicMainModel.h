@@ -25,7 +25,7 @@ public:
 	mysqlpp::StoreQueryResult fnGetSongInfoForFileID(int fileID);
 
 	//fnGetIntroTimeForFileID - get the intro time for a certain FileID:
-	double fnGetIntroTimeForFileID(int FileID, bool disconnectAfteryQuery = true);
+	double fnGetIntroTimeForFileID(int FileID);
 
 	//fnGetDurationForFileID - get the duration for a certain FileID:
 	double fnGetDurationForFileID(int FileID);
@@ -83,6 +83,8 @@ public:
 
 
 private:
+	bool isConnected;
+
 	//private methods:
 
 	//connect() - create a new MySQL object and connect it to the

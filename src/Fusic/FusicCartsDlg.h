@@ -173,6 +173,8 @@ private:
 	HACCEL  m_hAccelTable;				//store accelerateor debug info.
 	CFusicLoginDlg*		m_pLoginDlg;	//the pointer to the login dialog
 	CFusicMainDlg*		m_pMainDlg;
+
+	bool isConnected;
 									
 									//private member functions:
 
@@ -187,6 +189,13 @@ private:
 
 	// fnGetFileDurationForFileID - this will return a file duration given a file ID from the database.
 	double fnGetFileDurationForFileID(int intFileID);
+
+	//connect() - create a new MySQL object and connect it to the
+	//database:
+	bool connect();
+
+	//disconnect to the database:
+	void disconnect();
 
 protected:
 	virtual void PostNcDestroy();

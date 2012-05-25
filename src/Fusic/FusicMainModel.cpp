@@ -9,16 +9,15 @@ CFusicMainModel::CFusicMainModel(void)
 {
 	//construct a new connection object:
 	m_pMySQLConn = NULL;
+	isConnected = false;
+	connect();
 }
 
 //destructor:
 CFusicMainModel::~CFusicMainModel(void)
 {
 	//ensure that the object is deleted:
-	if(m_pMySQLConn != NULL)
-	{
-		delete m_pMySQLConn;
-	}
+	disconnect();
 }
 
 extern playoutSettings g_settings;
@@ -102,9 +101,6 @@ bool CFusicMainModel::fnGetSettings()
 		}
 	}
 
-	//disconnect from the database:
-	disconnect();
-
 	return true;
 }
 
@@ -136,9 +132,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetSongsFowShowId(int ShowID)
 	//do the query:
 	res = doQuery(sqlQuery);
 
-	//disconnect from the database:
-	disconnect();
-
 	//return the result:
 	return res;
 }
@@ -168,15 +161,12 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetSongInfoForFileID(int fileID)
 	//do the query:
 	res = doQuery(sqlQuery);
 
-	//disconnect from the database:
-	disconnect();
-
 	//return the result:
 	return res;
 }
 
 //fnGetIntroTimeForFileID - get the intro time for a certain FileID:
-double CFusicMainModel::fnGetIntroTimeForFileID(int FileID, bool disconnectAfteryQuery)
+double CFusicMainModel::fnGetIntroTimeForFileID(int FileID)
 {
 	mysqlpp::StoreQueryResult res;
 	CString sqlQuery;
@@ -195,11 +185,6 @@ double CFusicMainModel::fnGetIntroTimeForFileID(int FileID, bool disconnectAfter
 	sqlQuery.Append(";");
 
 	res = doQuery(sqlQuery);
-
-	if(disconnectAfteryQuery)
-	{
-		disconnect();
-	}
 
 	if(res[0]["File_Intro"] != mysqlpp::null)
 	{
@@ -229,8 +214,6 @@ double CFusicMainModel::fnGetDurationForFileID(int FileID)
 	sqlQuery.Append(";");
 
 	res = doQuery(sqlQuery);
-
-	disconnect();
 
 	if(res[0]["File_Duration"] != mysqlpp::null)
 	{
@@ -303,11 +286,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetFilesForPlaylistIDAndSearchStrin
 		res1 = query.store();
 	}
 
-
-	//disconnect from the database:
-	disconnect();
-
-
 	//return the result:
 	return res1;
 }
@@ -372,11 +350,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetFilesForPlaylistID
 		res1 = doQuery(sqlQuery);
 	}
 
-
-	//disconnect from the database:
-	disconnect();
-
-
 	//return the result:
 	return res1;
 }
@@ -406,14 +379,12 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetSweepersForSongID(int fileID, in
 	//ensure we got a valid result:
 	if(resFile.size() == 0)
 	{
-		disconnect();
 		return res;
 	}
 
 	//ensure that the song has an intro:
 	if(resFile[0]["File_Intro"] == mysqlpp::null)
 	{
-		disconnect();
 		return res;
 	}
 	else
@@ -456,10 +427,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetSweepersForSongID(int fileID, in
 	//do the query:
 	res = doQuery(sqlQuery);
 
-
-	//disconnect from the database:
-	disconnect();
-
 	//return the result:
 	return res;
 }
@@ -478,19 +445,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetSongsForShowIDAndSearchString
 		return res;
 	}
 
-
-	if(m_pMySQLConn == NULL)
-	{
-		//hanvn't connected, return empty results set:
-		return res;
-	}
-
-	if(!m_pMySQLConn->connected())
-	{
-		//not connected:
-		return res;
-	}
-
 	mysqlpp::Query q = m_pMySQLConn->query();
 
 	q << "SELECT * FROM `tbl_files` WHERE File_Type = 'S' AND"
@@ -500,7 +454,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetSongsForShowIDAndSearchString
 
 	res = q.store();
 	searchString.ReleaseBuffer();
-	disconnect();
 
 	//return the result:
 	return res;
@@ -534,9 +487,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetPlaylistInfroForShowID
 	//do the query:
 	res = doQuery(sqlQuery);
 
-	//disconnect from the database:
-	disconnect();
-
 	//return the result:
 	return res;
 }
@@ -568,9 +518,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetJinglesForShowID(int showID)
 	//do the query:
 	res = doQuery(sqlQuery);
 
-	//disconnect from the database:
-	disconnect();
-
 	//return the result:
 	return res;
 }
@@ -600,10 +547,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetJInglesForShowIDAndSearchString(
 	searchString.ReleaseBuffer();
 	res = query.store();
 
-	//disconnect from the database:
-	disconnect();
-
-
 	//return the result:
 	return res;
 }
@@ -622,18 +565,6 @@ fnGetFilesExcludingFilesAndArtist(std::vector<int> files,
 	//connect to the database:
 	if(!connect())
 	{
-		return res;
-	}
-
-	if(m_pMySQLConn == NULL)
-	{
-		//hanvn't connected, return empty results set:
-		return res;
-	}
-
-	if(!m_pMySQLConn->connected())
-	{
-		//not connected:
 		return res;
 	}
 
@@ -688,7 +619,6 @@ fnGetFilesExcludingFilesAndArtist(std::vector<int> files,
 	q << ";";
 
 	res = q.store();
-	disconnect();
 	
 	//return the result:
 	return res;
@@ -705,18 +635,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetFilesToExclude(std::vector<int>&
 	//connect to the database:
 	if(!connect())
 	{
-		return res;
-	}
-
-	if(m_pMySQLConn == NULL)
-	{
-		//hanvn't connected, return empty results set:
-		return res;
-	}
-
-	if(!m_pMySQLConn->connected())
-	{
-		//not connected:
 		return res;
 	}
 
@@ -780,7 +698,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetFilesToExclude(std::vector<int>&
 	q << ";";
 
 	res = q.store();
-	disconnect();
 	
 	//return the result:
 	return res;
@@ -814,9 +731,6 @@ mysqlpp::StoreQueryResult CFusicMainModel::fnGetFilesPlaiedInTheLast
 	//do the query:
 	res = doQuery(sqlQuery);
 
-	//disconnect from the database:
-	disconnect();
-
 	//return the result:
 	return res;
 }
@@ -847,9 +761,6 @@ void CFusicMainModel::fnLogFile(int fileID, int showID)
 
 	//do the query:
 	doQuery(sqlQuery);
-
-	//disconnect from the database:
-	disconnect();
 }
 
 //private methods:
@@ -858,23 +769,23 @@ void CFusicMainModel::fnLogFile(int fileID, int showID)
 //database:
 bool CFusicMainModel::connect()
 {
-	printf("Connecting...");
+	if (!isConnected) {
+		//construct the object:
+		m_pMySQLConn = new mysqlpp::Connection;
 
-	//construct the object:
-	m_pMySQLConn = new mysqlpp::Connection;
+		//connect to the database:
+		isConnected = m_pMySQLConn->connect(g_sctDBSettings.strDBDatabase,
+			g_sctDBSettings.strDBHost,
+			g_sctDBSettings.strDBUser,
+			g_sctDBSettings.strDBPassword);
 
-	//connect to the database:
-	return m_pMySQLConn->connect(g_sctDBSettings.strDBDatabase,
-		g_sctDBSettings.strDBHost,
-		g_sctDBSettings.strDBUser,
-		g_sctDBSettings.strDBPassword);
+	}
+	return isConnected;
 }
 
 //disconnect - disconnect from the database:
 void CFusicMainModel::disconnect()
 {
-	printf("Disconnecting...");
-
 	if(m_pMySQLConn != NULL)
 	{
 		//close the connection:
@@ -885,9 +796,8 @@ void CFusicMainModel::disconnect()
 
 		//reset the pointer:
 		m_pMySQLConn = NULL;
-
-		printf("Disconnected...");
 	}
+	isConnected = false;
 }
 
 //StoreQueryResult - internal function to do all queries:
@@ -927,7 +837,6 @@ bool CFusicMainModel::fnCheckMachineOnAir()
 	CString sqlQuery;
 	sqlQuery = "SELECT * from tbl_settings WHERE Setting_Name = 'onair_system_id';";
 	mysqlpp::StoreQueryResult res = doQuery(sqlQuery);
-	disconnect();
 	if(res[0]["Setting_Value"] == mysqlpp::null)
 	{
 		return false;
@@ -961,5 +870,4 @@ void CFusicMainModel::fnSetMachineOnAir()
 	g_systemID.ReleaseBuffer();
 	
 	q.exec();
-		disconnect();
 }
