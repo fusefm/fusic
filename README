@@ -1,3 +1,5 @@
-TBC
+Fusic
+Radio playout software developed in house by Fuse FM. Allows DJs to prepare shows at home (via an accompanying web interface), before presenting them in a studio. Includes track playlists and carts, along with LDAP authentication for users. Currently tied in to Fuse FM's internal systems - these dependencies will be removed in a later release.
 
-0.8.4 was the last build. Currently checking in source files from old SVN system
+Current Version
+0.8.5

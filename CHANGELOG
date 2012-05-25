@@ -1,0 +1,4 @@
+0.8.5 (25/05/12)
+- Fixes issue with numerous MySQL connections being created
+- Increased timeout on cart wall MySQL connection to deal with long periods of inactivity
+- Removes fader start libraries in preparation for new triggering methods
