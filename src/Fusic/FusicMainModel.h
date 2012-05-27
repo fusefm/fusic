@@ -81,7 +81,6 @@ public:
 	mysqlpp::StoreQueryResult fnGetFilesToExclude(std::vector<int>& files, 
 								  std::vector<CString>& artists);
 
-
 private:
 	bool isConnected;
 

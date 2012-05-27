@@ -334,6 +334,9 @@ BOOL CFusicCartsDlg::OnInitDialog()
 	//begin the fader start timer:
 	SetTimer(WM_USER + 10, 10, NULL);
 
+	//begin the fader ping timer:
+	SetTimer(WM_USER + 300000, 300000, NULL);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 }
 
@@ -976,8 +979,8 @@ void CFusicCartsDlg::OnBnClickedBtnRefresh()
 bool bolRan = false;
 void CFusicCartsDlg::OnTimer(UINT_PTR nIDEvent)
 {
-	// TODO: Add your message handler code here and/or call default
-	/*if(nIDEvent == (WM_USER +10))
+	// Every 10ms
+	/*if(nIDEvent == (WM_USER + 10))
 	{
 		if(faderStart)
 		{
@@ -994,8 +997,16 @@ void CFusicCartsDlg::OnTimer(UINT_PTR nIDEvent)
 		}
 	}*/
 
+	// Every 5 mins (300s)
+	if (nIDEvent == (WM_USER + 300000)) {
+		if (isConnected) {
+			m_PMYSQLConn->ping();
+		}
+	}
+
 	CDialog::OnTimer(nIDEvent);
 }
+
 
 //connect() - create a new MySQL object and connect it to the
 //database:
